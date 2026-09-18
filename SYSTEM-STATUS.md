@@ -48,6 +48,12 @@
   the sheet — phase them out for X/Bluesky if the boss wants pure sheet voice.
 - **Batch 8 DONE (2026-09-19):** drafts_bulk8.json — 200 X + 200 Bluesky,
   sheet voice batch 2, deduped vs everything including batch 7.
+- **Batch 9 DONE (2026-09-19):** drafts_bulk9.json — 200 X + 200 Bluesky,
+  "what real people are investing in" through Blitz's lens. Research-grounded
+  (ApeWisdom WSB tracker, 2026-09): SPY/QQQ top mentions, AI chips (NVDA, AMD,
+  MU, NBIS, CRWV), Intel comeback, Reddit/SpaceX retail darlings, 0DTE surge,
+  leveraged ETFs, 24h sessions, crypto. OPENERS_B9/BODIES_B9/CLOSERS_B9 pools.
+  Tickers + slang added to humanize_rules allowlist. No figures, no advice.
 - **Queue mix (2026-09-19):** pending Bluesky queue is now a MIX: every 3rd
   slot replaced with a batch 7 sheet-voice post (78 of 240, ~13/day through
   Sep 24). Times unchanged, zero dupes, cloud verified (240 pending no-op run).
