@@ -57,3 +57,10 @@ Postiz is a hosted self-serve scheduler (like Buffer). It can post to IG, X, Blu
 - `~/Desktop/poster-and-scheduler/youtube/yt_caption_bank.json` — YT captions
 - `~/Desktop/poster-and-scheduler/x-bluesky/` — Bluesky scheduler (Node)
 - Drive: `gdrive1:blitz-videos/` (83 videos) · source folders untouched: `~/ape-gtm/ugc/blitz/finished/`, `~/Desktop/Blitz videos/`
+
+## ⏰ REMINDER — OCT 1, 2026: MAKE THIS REPO PRIVATE AGAIN
+
+This repo went PUBLIC on 2026-09-18 only to dodge the exhausted GitHub free-minute
+quota (public repos = unlimited minutes). On Oct 1 the private 2,000 minutes reset.
+Run: gh repo edit mrfentmen/ape-social-machine --visibility private --accept-visibility-change-consequences
+Boss approved the public exposure of drafts as a stopgap. No secrets are in git.
