@@ -30,6 +30,13 @@ ALLOW = {
     "yeet", "gainz", "bagholder", "bagholders", "unhinged", "coiled",
     "twitchy", "twitch", "twitches", "flashy", "snappy", "premarket",
     "afterhours", "tape", "gibbon", "gibbons", "sniper", "snipers",
+    # Retail tickers + market slang (batch 9, what retail actually trades 2026-09)
+    "amd", "tsla", "qqq", "intc", "mstr", "rddt", "crwv", "nbis", "googl",
+    "soxl", "wulf", "iren", "smci", "spx", "pltr", "rklb", "avgo", "smh",
+    "asml", "meta", "aapl", "msft", "amzn", "gme", "dte", "crypto", "intel",
+    "solana", "xrp", "doge", "gpus", "datacenter", "datacenters",
+    "hyperscaler", "hyperscalers", "nebius", "coreweave", "robinhood",
+    "webull", "sept", "qube", "meme", "memes", "spacex", "megacap", "megacaps",
 }
 
 # ---------------------------------------------------------------- dictionary
@@ -61,7 +68,7 @@ COMMON = {
     "monetizing", "survived", "sourced", "replacing", "skipped", "optimized",
     "gatekeeping", "rebalances", "readiness", "unsafe", "recurring",
     "resilient", "attention", "rotation", "offering", "sophisticated",
-    "tv", "info", "google", "googled", "youtube",
+    "tv", "info", "google", "googled", "youtube", "espresso",
 }
 
 

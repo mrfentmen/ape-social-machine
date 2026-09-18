@@ -177,6 +177,85 @@ BODIES_B7 = [
     "Charts don't scare me. Lag does.",
 ]
 
+# ------------------------------------------------- batch 9 pools (2026-09-19)
+# "What real people are investing in" through Blitz's lens. Grounded in live
+# retail-flow research (ApeWisdom WSB tracker + 2026 trend scans): SPY/QQQ
+# biggest mentions, AI chips everywhere (NVDA, AMD, MU, NBIS, CRWV, SMCI),
+# Intel comeback trade, SpaceX/Reddit/CoreWeave retail darlings, 0DTE options
+# surge, leveraged ETFs like SOXL, 24 hour sessions, crypto never sleeps,
+# TSLA retail army. No figures, no price targets, no advice. Blitz trades it
+# fast and exits.
+
+OPENERS_B9 = [
+    "Real people are not buying 40 stocks. They are riding one AI wave and naming it five tickers.",
+    "The whole feed is one trade right now: AI chips. NVDA, AMD, MU, repeat.",
+    "Everyone's a fund manager until the open hits. Then it's SPY, 0DTE, and vibes.",
+    "Retail does not do quiet. We do Intel comebacks and Reddit pumps.",
+    "The AI trade has a bench now, not just starters.",
+    "I watched the most mentioned tickers today. It is a mob, and I am in it.",
+    "Retail's portfolio: one ETF, three AI names, and a coin they won't admit to.",
+    "Nothing trades like retail money. Nothing exits like it either.",
+    "The market's love language right now is semiconductors.",
+    "Everybody's looking for the next squeeze. Nobody's looking for the exit.",
+    "SPY is the gateway drug. SOXL is the personality change.",
+    "Retail found 24 hour sessions. Sleep is now optional.",
+    "The same crowd that reads filings now reads options chains. Growth.",
+    "Intel is the comeback trade. Retail loves a redemption arc.",
+    "TSLA moves because retail moves it. That is not a diss. That is the point.",
+    "You can tell what retail owns by what gaps at the open.",
+    "The group chat consensus: AI, chips, and one moonshot each.",
+    "Options volume says the people want speed. I relate.",
+]
+
+BODIES_B9 = [
+    "NVDA is not a stock anymore. It is the weather everyone trades in.",
+    "SPY, QQQ, and a prayer. The retail trinity.",
+    "Micron, Nebius, CoreWeave. The AI trade has a bench now, not just starters.",
+    "0DTE is the espresso shot of options. Expire today, decide today, nothing carried home.",
+    "Meme moves peak faster now. In and out before the crowd screenshots the chart.",
+    "Crypto trades all night, so my alerts never sleep. Honestly, neither do I.",
+    "Leveraged ETFs are a rental, not a home. Return them by Friday.",
+    "Intel on a comeback, SpaceX locked up, Reddit trading on Reddit. You can't script this feed.",
+    "The AI names move together. One sneeze, three tickers, same trade.",
+    "Retail scalps the same five charts. I just happen to scalp them faster.",
+    "Short interest plus social buzz is the recipe. Execution is still the hard part.",
+    "The gap up belongs to whoever read the room at 6am, not 10am.",
+    "Everybody wants fast cash. Few want fast losses on the way. That's the filter.",
+    "The premarket crowd is the new due diligence. Read it like a filing.",
+    "Chips, power, and datacenters. Follow the electricity and you find the trade.",
+    "One ticker dominates the feed, then the rotation hits, and it's a new king by Friday.",
+    "The QQQ is just retail's scoreboard. We check it like a fantasy league.",
+    "Options chains are the new group chat. The volume tells you the mood.",
+    "Retail never left. It just moved from memes to megacaps with memes still in the portfolio.",
+    "The exit is where retail gets tested. Anyone can click buy.",
+    "Volatility is the product now. We're all just subscribed.",
+    "Fast cash is small wins stacked at speed. Never marry a position.",
+    "The trade everyone's in is easy to find. The exit is the alpha.",
+    "Rotation is the real story: chips lead, energy chases, everything else waits.",
+    "24 hour markets blur the day. My stop losses keep the calendar.",
+    "The feed found three AI darlings this week. It will find three more next week.",
+    "Everyone's a genius in a green tape session. The red ones pay the tuition.",
+    "If the chart is on your feed before your watchlist, you're not early. You're the exit.",
+]
+
+CLOSERS_B9 = [
+    "Ride the wave, respect the exit.",
+    "Trade what's moving. Leave what's talking.",
+    "The trend pays. The exit keeps.",
+    "Fast in, faster out, no souvenirs.",
+    "Follow the flow, not the echo.",
+    "Speed is entry. Discipline is rent.",
+    "Catch the move, not the feeling.",
+    "The crowd buys the story. Sell it a ticket.",
+    "Rotation rewards the ready, not the loyal.",
+    "Momentum is a rental. Return it on time.",
+    "Be the fast money, not the last money.",
+    "Scalp the hype. Keep the discipline.",
+    "The feed moves. So do I.",
+    "Small size, big speed, zero ego.",
+    "If it's crowded, have an exit buddy.",
+]
+
 CLOSERS_B7 = [
     "Think fast, trade faster.",
     "Stop thinking, start clicking.",
