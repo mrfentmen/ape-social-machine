@@ -1,0 +1,27 @@
+{
+  "name": "x-bluesky-poster",
+  "version": "1.0.0",
+  "description": "AI-powered posting bot for X and Bluesky",
+  "type": "module",
+  "scripts": {
+    "login": "node src/login.js",
+    "post": "node src/index.js",
+    "post:dry": "node src/index.js --dry",
+    "bsky": "node src/bluesky.js",
+    "bsky:dry": "node src/bluesky.js --dry",
+    "engage": "node src/engage.js",
+    "engage:dry": "node src/engage.js --dry",
+    "engage:check": "node src/engage.js --check",
+    "raw": "node src/raw.js",
+    "discover": "node src/discover.js",
+    "discover:dry": "node src/discover.js --dry",
+    "discover:check": "node src/discover.js --check"
+  },
+  "dependencies": {
+    "@atproto/api": "^0.20.28",
+    "dotenv": "^17.4.2",
+    "playwright": "^1.61.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}

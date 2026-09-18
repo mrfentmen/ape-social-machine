@@ -1,0 +1,181 @@
+"""Bluesky daily queue builder (STAGING ONLY by default).
+
+Reads Blitz voice drafts from the bulk draft files and builds a posting plan
+in bsky_queue_staging.json. It NEVER touches the live scheduler queue
+(x-bluesky/bsky_scheduled_posts.json) unless you run it with --arm AND the
+staging file exists. Nothing posts from this script itself; posting only
+happens if the human runs the scheduler with the live queue armed.
+
+Plan shape (SYSTEM-STATUS.md Bluesky goal, like Instagram's machine):
+  3 posts/day, spaced ~4h apart, starting tomorrow 10:00 local.
+
+Usage:
+  python3 bsky_build_queue.py                  # build staging plan (3 days x 3)
+  python3 bsky_build_queue.py --days 7         # longer plan
+  python3 bsky_build_queue.py --show           # print current staging plan
+  python3 bsky_build_queue.py --arm            # copy staging -> live scheduler queue
+  python3 bsky_build_queue.py --disarm         # wipe live scheduler queue (empty [])
+"""
+
+import json
+import os
+import random
+import sys
+from datetime import datetime, timedelta, timezone
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+LOCAL_TZ = datetime.now().astimezone().tzinfo
+
+DRAFT_FILES = ["drafts_bulk4.json", "drafts_bulk5.json"]  # newest Blitz voice first
+STAGING = os.path.join(HERE, "bsky_queue_staging.json")
+LIVE = os.path.join(HERE, "x-bluesky", "bsky_scheduled_posts.json")
+SENT_LOG = os.path.join(HERE, "x-bluesky", "bsky_posts_sent.txt")
+
+POSTS_PER_DAY = 3
+HOURS_BETWEEN = 4
+START_HOUR = 10  # 10:00 local like the IG posting window
+
+
+def norm(t):
+    return " ".join(t.split()).lower()
+
+
+def load_sent_texts():
+    """Texts already posted to Bluesky (from the sent log)."""
+    sent = set()
+    if os.path.exists(SENT_LOG):
+        with open(SENT_LOG) as f:
+            for line in f:
+                # format: ISO | uri | tag | text with newlines flattened
+                parts = line.split(" | ", 3)
+                if len(parts) == 4:
+                    sent.add(norm(parts[3]))
+    return sent
+
+
+def load_draft_pool():
+    """Bluesky-usable drafts: voice==blitz, <=300 chars, not already posted."""
+    sent = load_sent_texts()
+    pool = []
+    for fn in DRAFT_FILES:
+        path = os.path.join(HERE, fn)
+        if not os.path.exists(path):
+            continue
+        with open(path) as f:
+            data = json.load(f)
+        for p in data.get("bluesky", []):
+            if p.get("voice") != "blitz":
+                continue
+            if len(p["text"]) > 300:
+                continue
+            if norm(p["text"]) in sent:
+                continue
+            pool.append({"source": fn, "id": p["id"], "text": p["text"]})
+    return pool
+
+
+def build_plan(days: int) -> list:
+    pool = load_draft_pool()
+    if len(pool) < days * POSTS_PER_DAY:
+        raise SystemExit(f"not enough unused drafts: have {len(pool)}, "
+                         f"need {days * POSTS_PER_DAY}. Generate more or add files to DRAFT_FILES.")
+    r = random.Random(20260921)
+    r.shuffle(pool)
+    chosen = pool[:days * POSTS_PER_DAY]
+
+    plan = []
+    tomorrow = (datetime.now(LOCAL_TZ) + timedelta(days=1)).replace(
+        hour=START_HOUR, minute=0, second=0, microsecond=0)
+    i = 0
+    for day in range(days):
+        for slot in range(POSTS_PER_DAY):
+            when = tomorrow + timedelta(days=day, hours=slot * HOURS_BETWEEN)
+            d = chosen[i]
+            i += 1
+            plan.append({
+                "at_local": when.isoformat(),
+                "at_utc": when.astimezone(timezone.utc).isoformat().replace("+00:00", "Z"),
+                "text": d["text"],
+                "source": f"{d['source']}#{d['id']}",
+            })
+    return plan
+
+
+def cmd_show():
+    if not os.path.exists(STAGING):
+        print("No staging plan. Run: python3 bsky_build_queue.py")
+        return
+    with open(STAGING) as f:
+        plan = json.load(f)
+    print(f"Staging plan: {len(plan)} posts "
+          f"({sum(1 for p in plan if not p.get('queued'))} not yet queued to live)\n")
+    for p in plan:
+        flag = "QUEUED" if p.get("queued") else "staged "
+        print(f"[{flag}] {p['at_local']}  ({p['source']})")
+        print(f"   {p['text'][:90].replace(chr(10), ' / ')}...")
+    print("\nThis is a STAGING file. Nothing is scheduled until you run --arm.")
+
+
+def cmd_arm():
+    """Copy staging plan into the LIVE scheduler queue (explicit action only)."""
+    if not os.path.exists(STAGING):
+        raise SystemExit("no staging plan; run: python3 bsky_build_queue.py")
+    with open(STAGING) as f:
+        plan = json.load(f)
+    pending = [p for p in plan if not p.get("queued")]
+    if not pending:
+        print("All staged posts already queued. Nothing to arm.")
+        return
+    with open(LIVE) as f:
+        live = json.load(f)
+    for p in pending:
+        live.append({
+            "at": p["at_utc"],
+            "text": p["text"],
+            "kind": "root",
+            "target_uri": None,
+            "posted": False,
+            "posted_at": None,
+            "uri": None,
+            "error": None,
+        })
+    with open(LIVE, "w") as f:
+        json.dump(live, f, indent=2)
+    for p in plan:
+        p["queued"] = True
+    with open(STAGING, "w") as f:
+        json.dump(plan, f, indent=2)
+    print(f"ARMED: {len(pending)} posts copied to live scheduler queue {LIVE}")
+    print("The scheduler will post them when you run:")
+    print("  cd ~/Desktop/poster-and-scheduler/x-bluesky && node src/scheduler.js")
+    print("(Preview first with: node src/scheduler.js --dry)")
+
+
+def cmd_disarm():
+    with open(LIVE, "w") as f:
+        json.dump([], f, indent=2)
+    print(f"DISARMED: live scheduler queue at {LIVE} is now empty. Nothing will fire.")
+
+
+def main():
+    if "--show" in sys.argv:
+        return cmd_show()
+    if "--disarm" in sys.argv:
+        return cmd_disarm()
+    if "--arm" in sys.argv:
+        return cmd_arm()
+    days = 3
+    for i, a in enumerate(sys.argv):
+        if a == "--days":
+            days = int(sys.argv[i + 1])
+    plan = build_plan(days)
+    with open(STAGING, "w") as f:
+        json.dump(plan, f, indent=2)
+    print(f"staged {len(plan)} posts over {days} days "
+          f"({POSTS_PER_DAY}/day, {HOURS_BETWEEN}h apart, from {START_HOUR}:00 local)")
+    print(f"wrote {STAGING}")
+    print("NOTHING IS SCHEDULED YET. Review with --show, then arm with --arm when you say go.")
+
+
+if __name__ == "__main__":
+    main()

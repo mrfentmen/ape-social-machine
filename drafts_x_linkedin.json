@@ -1,0 +1,72 @@
+{
+  "note": "DRAFT posts for X and LinkedIn. Ape AI voice per the BRAND VOICE doc and the original skill file. LinkedIn drafts post AS THE COMPANY PAGE (LINKEDIN_ORG_URN), never as Blitz's personal profile. Nothing scheduled, nothing posted. Humanized: all dashes, em and hyphen, removed from post text per the humanized rules.",
+  "x": [
+    {
+      "id": "x1",
+      "theme": "research time",
+      "text": "Researching one stock used to mean 10 tabs, 3 YouTube videos, and a headache.\n\nNow it's asking \"why did NVDA move today?\" and getting the actual answer in plain English.\n\nThat's the whole product. That's Ape AI.",
+      "post_as": "blitztheape"
+    },
+    {
+      "id": "x2",
+      "theme": "corporate jargon cynicism",
+      "text": "The market moves on earnings, rates, and human panic.\n\nNot on whatever \"synergistic headwinds\" means in a fund's latest letter.\n\nApe AI reads the filings so retail investors don't have to pretend they did.",
+      "post_as": "blitztheape"
+    },
+    {
+      "id": "x3",
+      "theme": "headline vs why",
+      "text": "Headline: \"Stock falls 8% on earnings.\"\n\nUseful information: which metric missed, by how much, and whether guidance actually got cut.\n\nThe second part is what Ape AI tells you. The first part is what makes you panic sell.",
+      "post_as": "blitztheape"
+    },
+    {
+      "id": "x4",
+      "theme": "portfolio honesty",
+      "text": "Most people can't answer: what do I actually own, and why?\n\nConnect your brokerage, and Ape AI lays out your holdings, concentration risk, and what changed. One place, in English.\n\nEducational. Not advice. Just visibility.",
+      "post_as": "blitztheape"
+    },
+    {
+      "id": "x5",
+      "theme": "retail vs wall street tools",
+      "text": "Institutions pay $20k/seat for research terminals.\n\nRetail gets a headline, a hot take, and vibes.\n\nThat gap is why Ape AI exists. Ask questions. Get answers. Decide for yourself.",
+      "post_as": "blitztheape"
+    }
+  ],
+  "linkedin": [
+    {
+      "id": "li1",
+      "theme": "the research gap story",
+      "text": "Retail investors don't have an information problem anymore.\n\nThey have a translation problem.\n\nEverything you need is technically public: the 10K, the earnings call, the guidance revision, the 13F. It's all out there. And it's all written in a dialect designed to be skimmable only by people who already know the vocabulary.\n\nMost smart people, engineers, nurses, small business owners, open an earnings release, scroll for 40 seconds, and close the tab. Not because they don't care. Because the effort of deciphering it feels worse than buying whatever someone on TV mentioned.\n\nThat gap is why Ape AI (AskApe.com) was built.\n\nIt's an AI research companion for retail investors. You ask questions in plain English, like \"why did this stock move today\" or \"what changed in this quarter's guidance\" or \"what does this company actually do,\" and you get sourced, structured answers instead of a wall of SEC formatting.\n\nNot a broker. Not auto trading. Not signals. A research tool that treats you like an adult.\n\nThe market doesn't reward people with the most information anymore. It rewards people who can process what they already have.\n\nWhat's the first thing you'd ask if research took minutes instead of evenings?\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page"
+    },
+    {
+      "id": "li2",
+      "theme": "earnings season discipline",
+      "text": "Earnings season is where retail investors find out whether they have a process or just a portfolio.\n\nA stock drops 8%. The headline tells you the number. It never tells you the sentence that matters, which is usually buried three paragraphs deep in the release: the guidance change, the margin note, the one time charge doing the heavy lifting.\n\nIf you can't distinguish \"the business broke\" from \"the quarter missed a noisy estimate,\" you're not investing. You're reacting, with extra steps.\n\nThis is the boring, unglamorous work that actually compounds: read the release, find the number that moved the stock, decide if it changes the thesis. Most people skip it because it's tedious, not because it's hard.\n\nWe built Ape AI (AskApe.com) to do that tedious layer. It pulls the actual figures and explains what changed and why the market cares, so the decision stays yours but the archaeology isn't.\n\nNo predictions. No guaranteed anything. Just fewer people selling good companies over a headline.\n\nHow do you currently separate signal from noise during earnings week? Genuinely curious what people's process looks like.\n\nEducational content only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page"
+    },
+    {
+      "id": "li3",
+      "theme": "portfolio visibility / honesty",
+      "text": "A quick exercise: name every position you hold, and one sentence on why you own it.\n\nMost people get to position four or five and start hedging.\n\nNot because they're careless, but because nobody taught them that a portfolio is a set of claims about the world. \"I own this because I think margins stay strong\" is a claim. Claims can be checked. Positions without claims are just lottery tickets with extra paperwork.\n\nThat's the gap between owning stocks and having a strategy, and it's bridgeable with boring tools: a holdings list, a concentration check, a regular \"what changed\" review.\n\nApe AI (AskApe.com) automates the boring part. Connect a brokerage and it maps your holdings, surfaces concentration, and tells you what actually changed this week, in plain English.\n\nThe thinking part stays with you. It should. That's the whole point.\n\nIf you actually did the exercise: how many positions could you defend in one sentence?\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page"
+    },
+    {
+      "id": "li4",
+      "theme": "anti hype / tools over gurus",
+      "text": "Unpopular opinion in fintech marketing: most people don't need more confidence. They need better friction.\n\nThe standard pitch is the opposite, all \"trade with conviction\" and \"find your edge,\" because confidence sells subscriptions. But look at what actually hurts retail returns: overtrading, reacting to headlines, position sizes based on vibes.\n\nThe fix isn't more conviction. It's more structure between impulse and order.\n\nThat structure looks like: check what actually changed, compare it to your own thesis, look at your portfolio's exposure, then decide. Same info the pros use, minus the $20k/seat terminal.\n\nApe AI (AskApe.com) is that middle layer, an AI research companion that answers \"what happened and does it matter\" in plain English, for people who'd rather verify than vibe.\n\nWe're not selling conviction. We're selling the pause button.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page"
+    },
+    {
+      "id": "li5",
+      "theme": "build in public / why we made this",
+      "text": "Ape AI exists because of a gap the industry keeps ignoring.\n\nTwo groups consistently talk past each other.\n\nGroup one: finance professionals, with terminals, models, and vocabulary that took a CFA to acquire. Group two: everyone else, with a brokerage app, a YouTube habit, and genuine questions the industry has zero interest in answering at their level.\n\nThe advice aimed at group two is either condescending (\"just index\") or reckless (\"these 5 stocks NOW\"). Almost none of it treats them as adults who could do real research if the research were legible.\n\nApe AI is that legibility layer. AskApe.com: ask a question about a stock, an earnings report, or your own portfolio in plain English, get a structured, sourced answer. Brokerage connections let it see what you actually hold so the context is real, not generic.\n\nNot advice. Not automation. A translator between you and the paperwork.\n\nIf you invest (or know someone who does), what's the question you've always wanted answered but couldn't quite google?\n\nEducational content only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page"
+    }
+  ]
+}

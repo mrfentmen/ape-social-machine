@@ -1,0 +1,889 @@
+{
+  "note": "120 BULK DRAFTS, BATCH 5, AskApe.com CTA edition: every post closes with a find out more at AskApe.com call to action. X posts as @blitztheape and Bluesky posts as axelblitzbeaumont.bsky.social in BLITZ voice (first person ape persona). LinkedIn posts as the company page (LINKEDIN_ORG_URN) in SKILL voice. Humanized: zero dashes of any kind, spellchecked. Drafts only, nothing scheduled or posted. Deduped against all prior batches.",
+  "x": [
+    {
+      "id": "x1",
+      "text": "A one time charge shows up every year at some companies. Recurring. Odd how that works.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x2",
+      "text": "I have no hot takes. I have cold filings and warm coffee.\n\nBuybacks moved the number. The business didn't move much. Two different stories, one ticker.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x3",
+      "text": "I show my sources. You show your receipts. Fair trade.\n\nI keep my receipts: filings, dates, reasons. Confidence without homework is decoration.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x4",
+      "text": "My edge is boring: I actually read the thing.\n\nI found the precedent for an unprecedented quarter in an older filing. Research finds things.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x5",
+      "text": "Everyone bought the story. I checked the story's math.\n\nI would rather be slow and right than fast and confident. The receipts prefer it too.\n\nFind out more at AskApe.com. The homework is done.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x6",
+      "text": "Market gurus shout. I read. We are not the same.\n\nChecking the price hourly is a subscription to anxiety. I canceled that subscription.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x7",
+      "text": "I checked cash from operations before I believed a single headline. Cash keeps better records than narratives.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x8",
+      "text": "The ticker told you nothing. I read the filing instead.\n\nPosition sizing is the most underrated risk tool. It costs nothing and it works.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x9",
+      "text": "The release had one sentence that mattered. I found it.\n\nThe word adjusted did a lot of lifting in that release. I checked what got adjusted away.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x10",
+      "text": "I don't need luck. I need sources and a second pass.\n\nBacktests don't pay for groceries. Boring consistency might. I shop accordingly.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x11",
+      "text": "Position sizing is the most underrated risk tool. It costs nothing and it works.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x12",
+      "text": "I checked the cash flow before I checked the comments.\n\nA one time charge shows up every year at some companies. Recurring. Odd how that works.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x13",
+      "text": "I checked the cash flow before I checked the comments.\n\nGuidance is marketing with a spreadsheet attached. I read the spreadsheet part twice.\n\nFind out more at AskApe.com. The homework is done.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x14",
+      "text": "A green month tests discipline. A red month tests the thesis. Both exams matter.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x15",
+      "text": "The earnings release and the 10Q disagreed. Almost nobody noticed. The 10Q wins.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x16",
+      "text": "The ticker told you nothing. I read the filing instead.\n\nSeasonality gets cited like physics. It's closer to trivia. I stopped paying for trivia.\n\nFind out more at AskApe.com. The ape did the reading.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x17",
+      "text": "Backtests don't pay for groceries. Boring consistency might. I shop accordingly.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x18",
+      "text": "I let the numbers talk first. Then I decide.\n\nI audit my own history now. The investor who writes reasons down can't lie to himself later.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x19",
+      "text": "The release said strong demand. Strong in what units? I asked. The release went quiet.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x20",
+      "text": "I keep my receipts: filings, dates, reasons. Confidence without homework is decoration.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x21",
+      "text": "I stopped calling it a long term hold and started calling it a claim I recheck. More honest.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x22",
+      "text": "I have no hot takes. I have cold filings and warm coffee.\n\nI checked cash from operations before I believed a single headline. Cash keeps better records than narratives.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x23",
+      "text": "They posted a price target. I posted up with the 10K.\n\nThe footnote is where they legally had to tell you. I read it like a favor. It is one.\n\nFind out more at AskApe.com. The ape did the reading.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x24",
+      "text": "I don't worship a position. I interrogate it.\n\nPosition sizing is the most underrated risk tool. It costs nothing and it works.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x25",
+      "text": "I don't chase headlines. I read what the headline left out.\n\nNobody grades thoroughness. The market grades results. I still do the reading. Results improved.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x26",
+      "text": "Reading beat reacting again today. Same result as last week.\n\nEveryone argued about the price. I argued about the assumptions. Only one of us had evidence.\n\nFind out more at AskApe.com. The ape did the reading.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x27",
+      "text": "I treat every holding like a claim that owes me proof.\n\nThe narrative changes weekly. Unit economics change yearly. I bet on the slower clock.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x28",
+      "text": "I wrote down why I bought. Rereading it today was uncomfortable. Uncomfortable is useful.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x29",
+      "text": "The narrative changes weekly. Unit economics change yearly. I bet on the slower clock.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x30",
+      "text": "Nobody grades thoroughness. The market grades results. I still do the reading. Results improved.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x31",
+      "text": "A loss I planned for is tuition. A loss I didn't plan for is a leak. I patch leaks.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x32",
+      "text": "Market gurus shout. I read. We are not the same.\n\nI read the Q&A section first now. Analyst questions are a free map of the bear case.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x33",
+      "text": "I keep a list of what would prove me wrong. It saves me.\n\nThe company that can't explain its own numbers in one sentence is asking for trust on credit. No thanks.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x34",
+      "text": "Two tabs open: the release and the 10K. That's my whole desk.\n\nA loss I planned for is tuition. A loss I didn't plan for is a leak. I patch leaks.\n\nFind out more at AskApe.com. The ape did the reading.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x35",
+      "text": "Two tabs open: the release and the 10K. That's my whole desk.\n\nThe word adjusted did a lot of lifting in that release. I checked what got adjusted away.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x36",
+      "text": "I keep a list of what would prove me wrong. It saves me.\n\nNobody grades thoroughness. The market grades results. I still do the reading. Results improved.\n\nFind out more at AskApe.com. The homework is done.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x37",
+      "text": "Historical parallels are astrology with spreadsheets. I checked the footnote instead.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x38",
+      "text": "The group chat traded vibes. I traded attention.\n\nA thesis without a falsification condition is a tattoo. Mine are in pencil. Erasable.\n\nFind out more at AskApe.com. The homework is done.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x39",
+      "text": "I treat every holding like a claim that owes me proof.\n\nI checked cash from operations before I believed a single headline. Cash keeps better records than narratives.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "x40",
+      "text": "The company that can't explain its own numbers in one sentence is asking for trust on credit. No thanks.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "blitztheape",
+      "voice": "blitz",
+      "cta": "askape"
+    }
+  ],
+  "bluesky": [
+    {
+      "id": "bluesky1",
+      "text": "Everyone bought the story. I checked the story's math.\n\nThe word adjusted did a lot of lifting in that release. I checked what got adjusted away.\n\nFind out more at AskApe.com. The ape did the reading.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky2",
+      "text": "I read filings like menus: skip the garnish, price the meal.\n\nI found the precedent for an unprecedented quarter in an older filing. Research finds things.\n\nFind out more at AskApe.com. The ape did the reading.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky3",
+      "text": "I read the footnotes so you don't have to pretend you did.\n\nA red day is information about my temperament. I collect that data too.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky4",
+      "text": "Your broker app sells speed. I sell patience with receipts.\n\nThe market priced a story. The filing described a different story. I side with paperwork.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky5",
+      "text": "I asked one boring question about one boring filing. It paid.\n\nNobody grades thoroughness. The market grades results. I still do the reading. Results improved.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky6",
+      "text": "Diversification in five versions of the same trade is concentration in a costume. I counted mine.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky7",
+      "text": "I got curious about a number nobody quotes. Curiosity compounded.\n\nI read the whole Q&A. Management answered everything except the thing I asked. That was the answer.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky8",
+      "text": "I am just an ape with a library card and a grudge against hype.\n\nThe smartest take I read was written by someone with opposite exposure. I keep that in mind.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky9",
+      "text": "I read the footnotes so you don't have to pretend you did.\n\nThe narrative changes weekly. Unit economics change yearly. I bet on the slower clock.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky10",
+      "text": "The thesis needs everything to go perfectly for a year. That's not a thesis. That's a wish list.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky11",
+      "text": "The company that can't explain its own numbers in one sentence is asking for trust on credit. No thanks.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky12",
+      "text": "Every app makes buying one tap. None makes reviewing one tap. Notice the incentive.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky13",
+      "text": "I asked one boring question about one boring filing. It paid.\n\nBuybacks moved the number. The business didn't move much. Two different stories, one ticker.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky14",
+      "text": "The call transcript is free. Confusion is expensive. I choose free.\n\nI read the whole Q&A. Management answered everything except the thing I asked. That was the answer.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky15",
+      "text": "I have no hot takes. I have cold filings and warm coffee.\n\nI asked which number nobody was quoting. Turns out it was the one that decided things.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky16",
+      "text": "Ape see chart. Ape read filing. Ape know which one lies less.\n\nI read the term I didn't know. Then I read why it mattered. Ten minutes. Worth more than the takes.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky17",
+      "text": "Cost basis is not physics. The market never once asked what I paid. I got over it.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky18",
+      "text": "I read the footnotes so you don't have to pretend you did.\n\nA red day is information about my temperament. I collect that data too.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky19",
+      "text": "I let the numbers talk first. Then I decide.\n\nThe market priced a story. The filing described a different story. I side with paperwork.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky20",
+      "text": "I am just an ape with a library card and a grudge against hype.\n\nThe footnote is where they legally had to tell you. I read it like a favor. It is one.\n\nFind out more at AskApe.com. The homework is done.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky21",
+      "text": "I asked what would prove me wrong. Then I went and looked.\n\nThe earnings release and the 10Q disagreed. Almost nobody noticed. The 10Q wins.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky22",
+      "text": "I checked the cash flow before I checked the comments.\n\nI stopped calling it a long term hold and started calling it a claim I recheck. More honest.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky23",
+      "text": "The chart screamed. The footnote whispered. I listen to whispers.\n\nPosition sizing is the most underrated risk tool. It costs nothing and it works.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky24",
+      "text": "Everyone argued about the price. I argued about the assumptions. Only one of us had evidence.\n\nFind out more at AskApe.com. The homework is done.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky25",
+      "text": "The upgrade arrived near the high. Momentum wearing a suit. I checked the math anyway.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky26",
+      "text": "The footnote is where they legally had to tell you. I read it like a favor. It is one.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky27",
+      "text": "Historical parallels are astrology with spreadsheets. I checked the footnote instead.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky28",
+      "text": "A thesis without a falsification condition is a tattoo. Mine are in pencil. Erasable.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky29",
+      "text": "The thesis needs everything to go perfectly for a year. That's not a thesis. That's a wish list.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky30",
+      "text": "I audit my own history now. The investor who writes reasons down can't lie to himself later.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky31",
+      "text": "Diversification in five versions of the same trade is concentration in a costume. I counted mine.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky32",
+      "text": "They posted a price target. I posted up with the 10K.\n\nCost basis is not physics. The market never once asked what I paid. I got over it.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky33",
+      "text": "I would rather be slow and right than fast and confident. The receipts prefer it too.\n\nFind out more at AskApe.com. Sources attached.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky34",
+      "text": "I read filings like menus: skip the garnish, price the meal.\n\nDiversification in five versions of the same trade is concentration in a costume. I counted mine.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky35",
+      "text": "The company that can't explain its own numbers in one sentence is asking for trust on credit. No thanks.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky36",
+      "text": "The call transcript is free. Confusion is expensive. I choose free.\n\nI audit my own history now. The investor who writes reasons down can't lie to himself later.\n\nFind out more at AskApe.com. Ape reads. You decide.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky37",
+      "text": "A thesis without a falsification condition is a tattoo. Mine are in pencil. Erasable.\n\nFind out more at AskApe.com. Bananas optional.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky38",
+      "text": "I let the numbers talk first. Then I decide.\n\nI found the precedent for an unprecedented quarter in an older filing. Research finds things.\n\nFind out more at AskApe.com. Bring your skepticism.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky39",
+      "text": "The narrative changes weekly. Unit economics change yearly. I bet on the slower clock.\n\nFind out more at AskApe.com. Ask it the boring question.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    },
+    {
+      "id": "bluesky40",
+      "text": "The chart screamed. The footnote whispered. I listen to whispers.\n\nCost basis is not physics. The market never once asked what I paid. I got over it.\n\nFind out more at AskApe.com. Fewer tabs, more answers.",
+      "post_as": "axelblitzbeaumont.bsky.social",
+      "voice": "blitz",
+      "cta": "askape"
+    }
+  ],
+  "linkedin": [
+    {
+      "id": "li1",
+      "text": "Every quarter, companies publish the answers. Most readers never find the questions.\n\nWhy it matters: Financial content is optimized for the moment after reading: the reaction. Research is optimized for the moment after that: the decision. The two genres look identical in a feed and behave nothing alike over a year. Distinguishing them is the first skill worth building.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li2",
+      "text": "Earnings season is a vocabulary test that nobody signed up for, taken at market speed.\n\nThe practical implication: The Q&A section of an earnings call is the closest thing markets have to cross examination. Analyst questions reveal the consensus bear case. Evasive answers reveal where management feels thin. Summarizing those exchanges by theme does more for research quality than any new chart.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li3",
+      "text": "A portfolio review is only as honest as the tools that feed it.\n\nConsider the mechanism: Skepticism of AI in investing is healthy. The useful version asks whether the tool cites sources, distinguishes fact from estimate, and says the filing does not say when the data is missing. Products that clear that bar reduce risk. Products that do not are faster hype.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li4",
+      "text": "The interesting question in fintech right now is not what AI can generate. It is what AI can verify.\n\nConsider the mechanism: The most durable products in fintech do one boring thing reliably: they shorten the distance between a question and a sourced answer. Scores, signals, and predictions age badly because they inherit the market's uncertainty while pretending not to.\n\nFind out more at AskApe.com, built for exactly these questions.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li5",
+      "text": "A portfolio drifts one unreviewed quarter at a time. Drift is a default, not a decision.\n\nWhat most people miss: Brokerage connectivity is usually framed as convenience. It is more accurate to call it context. Without holdings data, research is generic. With it, the question shifts from what happened in the market to what happened to what you actually own.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li6",
+      "text": "The professionals' edge was never secrecy. It was throughput, and throughput is now buyable.\n\nWhy it matters: The best research habit costs nothing: for every position, write the sentence that would change your mind. Then, when a headline arrives, check it against that sentence. This turns breaking news from a trigger into a test.\n\nFind out more at AskApe.com, built for exactly these questions.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li7",
+      "text": "A portfolio review is only as honest as the tools that feed it.\n\nWhat the numbers say: Position concentration rarely feels like a decision. It accumulates through inertia: winners left to run, adds made in familiar names, nothing deliberately rebalanced. Surfacing drift is not hand holding. It is the difference between a strategy and a habit with equity exposure.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li8",
+      "text": "The interesting question in fintech right now is not what AI can generate. It is what AI can verify.\n\nThe uncomfortable part: Every portfolio has a shadow portfolio: the trades considered and skipped. Reviewing skipped ideas reveals whether a process filters well or just filters familiar. Visibility into that record is where improvement actually starts.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li9",
+      "text": "Access to markets got solved a decade ago. Access to understanding is the open problem.\n\nThe evidence points one way: Financial content is optimized for the moment after reading: the reaction. Research is optimized for the moment after that: the decision. The two genres look identical in a feed and behave nothing alike over a year. Distinguishing them is the first skill worth building.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li10",
+      "text": "The professionals' edge was never secrecy. It was throughput, and throughput is now buyable.\n\nHere is what changed: Companies disclose an enormous amount. The disclosures are engineered for legal precision rather than reader speed. A research layer does not change what is disclosed. It changes who can afford to read it.\n\nFind out more at AskApe.com, built for exactly these questions.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li11",
+      "text": "Most investing mistakes are made in the ten minutes after a headline is read.\n\nWhy it matters: Brokerage connectivity is usually framed as convenience. It is more accurate to call it context. Without holdings data, research is generic. With it, the question shifts from what happened in the market to what happened to what you actually own.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li12",
+      "text": "The most useful investing skill of the next decade will be knowing what to ignore.\n\nThe uncomfortable part: Every portfolio has a shadow portfolio: the trades considered and skipped. Reviewing skipped ideas reveals whether a process filters well or just filters familiar. Visibility into that record is where improvement actually starts.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li13",
+      "text": "Information is abundant. Judgment is scarce. The entire product gap lives between them.\n\nThe evidence points one way: Millions of people will pick stocks regardless of what the industry thinks they should do. They deserve better inputs than a notification and a vibe. Meeting people where they actually are beats correcting them from where they should be.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li14",
+      "text": "Every position in a portfolio is a claim about the world. Most claims were never written down.\n\nThe practical implication: The vocabulary gap deserves more attention than it gets. Impairment, revision to provision, change in fair value: each is one plain English sentence, and each carries a different implication for a thesis. Translating terminology is not simplifying investing. It is removing a gate that never held anything up.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li15",
+      "text": "There is a quiet difference between feeling informed and being informed. Portfolios can tell.\n\nThe practical implication: Earnings season rewards one specific skill: telling, within an hour, whether an update actually touched your thesis. That triage is teachable, and it is mostly tooling. Speed of reaction is not the skill. Speed of relevance detection is.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li16",
+      "text": "The market is unusually good at telling people what happened and unusually bad at telling them why.\n\nThe practical implication: Earnings season rewards one specific skill: telling, within an hour, whether an update actually touched your thesis. That triage is teachable, and it is mostly tooling. Speed of reaction is not the skill. Speed of relevance detection is.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li17",
+      "text": "The industry keeps selling conviction. What actually helps is better friction.\n\nWhat the numbers say: Every portfolio has a shadow portfolio: the trades considered and skipped. Reviewing skipped ideas reveals whether a process filters well or just filters familiar. Visibility into that record is where improvement actually starts.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li18",
+      "text": "The industry keeps selling conviction. What actually helps is better friction.\n\nThe practical implication: Portfolio honesty is a discipline, and like most disciplines it fails quietly. Holdings spread across apps, cost basis in one place, notes in another. The friction guarantees the review happens less. Consolidation is what makes the discipline possible.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li19",
+      "text": "The most useful investing skill of the next decade will be knowing what to ignore.\n\nConsider the mechanism: The most durable products in fintech do one boring thing reliably: they shorten the distance between a question and a sourced answer. Scores, signals, and predictions age badly because they inherit the market's uncertainty while pretending not to.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li20",
+      "text": "A portfolio review is only as honest as the tools that feed it.\n\nHere is what changed: Portfolio honesty is a discipline, and like most disciplines it fails quietly. Holdings spread across apps, cost basis in one place, notes in another. The friction guarantees the review happens less. Consolidation is what makes the discipline possible.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li21",
+      "text": "There is a quiet difference between feeling informed and being informed. Portfolios can tell.\n\nThe practical implication: The annual report has a structure that rewards patience: business description, risk factors, then numbers. Most readers invert it. Reading in order, even once, explains why the numbers look the way they do.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li22",
+      "text": "Between the headline and the decision, there is a gap. Most portfolios live in that gap.\n\nWhat most people miss: Nothing in a filing changes because a chart moved. The causation only runs one way, and keeping that direction straight is most of the discipline.\n\nFind out more at AskApe.com, built for exactly these questions.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li23",
+      "text": "Between the headline and the decision, there is a gap. Most portfolios live in that gap.\n\nThe practical implication: Portfolio honesty is a discipline, and like most disciplines it fails quietly. Holdings spread across apps, cost basis in one place, notes in another. The friction guarantees the review happens less. Consolidation is what makes the discipline possible.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li24",
+      "text": "A portfolio review is only as honest as the tools that feed it.\n\nThe evidence points one way: Brokerage connectivity is usually framed as convenience. It is more accurate to call it context. Without holdings data, research is generic. With it, the question shifts from what happened in the market to what happened to what you actually own.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li25",
+      "text": "Between the headline and the decision, there is a gap. Most portfolios live in that gap.\n\nHere is what changed: Skepticism of AI in investing is healthy. The useful version asks whether the tool cites sources, distinguishes fact from estimate, and says the filing does not say when the data is missing. Products that clear that bar reduce risk. Products that do not are faster hype.\n\nFind out more at AskApe.com, built for exactly these questions.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li26",
+      "text": "Financial literacy campaigns failed for a simple reason: they teach vocabulary when no decision is pending.\n\nWhat the numbers say: Nothing in a filing changes because a chart moved. The causation only runs one way, and keeping that direction straight is most of the discipline.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li27",
+      "text": "The filing was written by professionals, for professionals. Pretending otherwise is how mistakes happen.\n\nWhy it matters: Position concentration rarely feels like a decision. It accumulates through inertia: winners left to run, adds made in familiar names, nothing deliberately rebalanced. Surfacing drift is not hand holding. It is the difference between a strategy and a habit with equity exposure.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li28",
+      "text": "There is a quiet difference between feeling informed and being informed. Portfolios can tell.\n\nThe practical implication: Brokerage connectivity is usually framed as convenience. It is more accurate to call it context. Without holdings data, research is generic. With it, the question shifts from what happened in the market to what happened to what you actually own.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li29",
+      "text": "The interesting question in fintech right now is not what AI can generate. It is what AI can verify.\n\nWhy it matters: Financial content is optimized for the moment after reading: the reaction. Research is optimized for the moment after that: the decision. The two genres look identical in a feed and behave nothing alike over a year. Distinguishing them is the first skill worth building.\n\nFind out more at AskApe.com, built for exactly these questions.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li30",
+      "text": "Earnings season is a vocabulary test that nobody signed up for, taken at market speed.\n\nWhat the numbers say: The most durable products in fintech do one boring thing reliably: they shorten the distance between a question and a sourced answer. Scores, signals, and predictions age badly because they inherit the market's uncertainty while pretending not to.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li31",
+      "text": "The filing was written by professionals, for professionals. Pretending otherwise is how mistakes happen.\n\nThe evidence points one way: The vocabulary gap deserves more attention than it gets. Impairment, revision to provision, change in fair value: each is one plain English sentence, and each carries a different implication for a thesis. Translating terminology is not simplifying investing. It is removing a gate that never held anything up.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li32",
+      "text": "The interesting question in fintech right now is not what AI can generate. It is what AI can verify.\n\nThe uncomfortable part: The annual report has a structure that rewards patience: business description, risk factors, then numbers. Most readers invert it. Reading in order, even once, explains why the numbers look the way they do.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li33",
+      "text": "The interesting question in fintech right now is not what AI can generate. It is what AI can verify.\n\nWhat the numbers say: Most retail research time is spent assembling context that already exists: what the company does, what the segment names mean, which numbers the market tracks. That assembly is compressible. The judgment, whether the update changes the thesis, is not, and that division of labor is the whole point of a research companion.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li34",
+      "text": "Earnings season is a vocabulary test that nobody signed up for, taken at market speed.\n\nWhy it matters: Financial content is optimized for the moment after reading: the reaction. Research is optimized for the moment after that: the decision. The two genres look identical in a feed and behave nothing alike over a year. Distinguishing them is the first skill worth building.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li35",
+      "text": "Every quarter, companies publish the answers. Most readers never find the questions.\n\nThe practical implication: There are two versions of AI in finance. One generates confident output with no sources. The other shows its work: the claim, the source, and the qualifier, all visible. The first is a liability wearing a product badge. The second is what research assistance actually means.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li36",
+      "text": "Every quarter, companies publish the answers. Most readers never find the questions.\n\nWhat most people miss: The professional retail divide is not about intelligence or effort. It is infrastructure. Professionals have aggregation, tagging, and context built into their tools. Retail has open tabs. Closing that gap is the most valuable work fintech can do.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li37",
+      "text": "The professionals' edge was never secrecy. It was throughput, and throughput is now buyable.\n\nConsider the mechanism: Millions of people will pick stocks regardless of what the industry thinks they should do. They deserve better inputs than a notification and a vibe. Meeting people where they actually are beats correcting them from where they should be.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li38",
+      "text": "The filing was written by professionals, for professionals. Pretending otherwise is how mistakes happen.\n\nThe evidence points one way: Position concentration rarely feels like a decision. It accumulates through inertia: winners left to run, adds made in familiar names, nothing deliberately rebalanced. Surfacing drift is not hand holding. It is the difference between a strategy and a habit with equity exposure.\n\nFind out more at AskApe.com.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li39",
+      "text": "The professionals' edge was never secrecy. It was throughput, and throughput is now buyable.\n\nThe practical implication: There are two versions of AI in finance. One generates confident output with no sources. The other shows its work: the claim, the source, and the qualifier, all visible. The first is a liability wearing a product badge. The second is what research assistance actually means.\n\nFind out more at AskApe.com, and bring the questions you could never quite google.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    },
+    {
+      "id": "li40",
+      "text": "The professionals' edge was never secrecy. It was throughput, and throughput is now buyable.\n\nHere is what changed: Position concentration rarely feels like a decision. It accumulates through inertia: winners left to run, adds made in familiar names, nothing deliberately rebalanced. Surfacing drift is not hand holding. It is the difference between a strategy and a habit with equity exposure.\n\nFind out more at AskApe.com: plain English in, sourced answers out.\n\nEducational purposes only. Not financial advice.",
+      "post_as": "company_page",
+      "account": "Ape AI company page",
+      "voice": "skill",
+      "cta": "askape"
+    }
+  ]
+}
