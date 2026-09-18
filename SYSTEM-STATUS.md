@@ -46,6 +46,13 @@
   gamer energy; tagline "Think fast, trade faster."). Use B7 pools for all
   future Blitz batches. Old batches 1 to 6 sound like a research ape, not
   the sheet — phase them out for X/Bluesky if the boss wants pure sheet voice.
+- **Batch 8 DONE (2026-09-19):** drafts_bulk8.json — 200 X + 200 Bluesky,
+  sheet voice batch 2, deduped vs everything including batch 7.
+- **Queue mix (2026-09-19):** pending Bluesky queue is now a MIX: every 3rd
+  slot replaced with a batch 7 sheet-voice post (78 of 240, ~13/day through
+  Sep 24). Times unchanged, zero dupes, cloud verified (240 pending no-op run).
+  Future queues: sheet voice dominant (batches 7/8+). Voice rule is pinned in
+  BRAND-VOICE.md under 'BLITZ CHARACTER SHEET VOICE' — canonical, read it first.
 - **Hashtag rules (updated 2026-09-19, per boss):** brand tag `#AskApe`
   FIRST, then AskApeAI / ApeAI / NYC / Finance / Money / XYZ + discovery
   staples, up to 5 tags/post (MAX_TAGS=5 in blitz_pools.pick_tags). Letters
