@@ -89,9 +89,18 @@ jobs:
               python3 ig_scheduler.py run --max 5 && CHANGED=true || true
               git add instagram/schedule_queue.json
               if ! git diff --cached --quiet; then
-                git commit -m "ig queue state update [skip ci]"
-                git push origin main || { git pull --rebase origin main; git push origin main; }
+                git commit -m "ig queue state update [skip ci]" || true
               fi
+            fi
+            # Push whenever anything is unpushed (new state OR a push that
+            # failed on an earlier tick). Rebase-retry defeats git races.
+            if [ -n "$(git log origin/main..HEAD --oneline 2>/dev/null)" ]; then
+              for attempt in 1 2 3; do
+                if git push origin main 2>/dev/null; then break; fi
+                echo "push attempt $attempt failed - rebasing on remote and retrying"
+                git fetch origin main && git rebase origin/main || true
+                sleep 5
+              done
             fi
             sleep 120
           done

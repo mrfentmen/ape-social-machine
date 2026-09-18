@@ -85,9 +85,18 @@ jobs:
               node src/scheduler.js --max-wait 60 || true
               git add x-bluesky/bsky_scheduled_posts.json
               if ! git diff --cached --quiet; then
-                git commit -m "bsky queue state update [skip ci]"
-                git push origin main || { git pull --rebase origin main; git push origin main; }
+                git commit -m "bsky queue state update [skip ci]" || true
               fi
+            fi
+            # Push whenever anything is unpushed (new state OR a push that
+            # failed on an earlier tick). Rebase-retry defeats git races.
+            if [ -n "$(git log origin/main..HEAD --oneline 2>/dev/null)" ]; then
+              for attempt in 1 2 3; do
+                if git push origin main 2>/dev/null; then break; fi
+                echo "push attempt $attempt failed - rebasing on remote and retrying"
+                git fetch origin main && git rebase origin/main || true
+                sleep 5
+              done
             fi
             sleep 60
           done
