@@ -5,12 +5,16 @@ Rule: posts are ALWAYS spaced 15+ min apart inside any day. Never burst.
 
 | Platform | Hard cap (24h) | Our cadence | Notes |
 |---|---|---|---|
-| Threads | 250 API posts | 40/day | 500 chars; ONE topic tag per post; 24x #AskApe + #Investing/#AI/#Stocks/#Trading rotation |
-| Instagram | ~50 API posts (some docs 100; we HIT it Sep 18, resets midnight) | 20/day | reels via cloud; if blocked, wait for reset, queue self-heals |
-| Bluesky | ~1,666 posts/day theoretical (3 pts/post, 5k pts/h, 35k/day); 300 logins/day | 40/day | no real ceiling; loop runner logs in ~1x/hour, fine |
-| X (via Postiz) | no public per-account cap (old platform cap 2,400/day) | 40/day | Postiz publishes on its own clock |
+| Threads | 250 API posts | 60/day (bumped Sep 18) | 500 char max (sweet spot 200-450); ONE topic tag per post; if body mentions AskApe, tag = #AskApe, else rotate #Investing/#AI/#Stocks/#Trading |
+| Instagram | 100/day standalone API (boss's Meta Business Suite key); Postiz path also available | 20/day | reels via cloud; rate-limit block resets on rolling window |
+| Bluesky | ~1,666 posts/day (3 pts/post, 5k pts/h, 35k/day); 300 logins/day | 60/day (bumped Sep 18) | no real ceiling; loop runner logs in ~1x/hour, fine |
+| X (via Postiz) | no public per-account cap (old platform cap 2,400/day) | 60/day (bumped Sep 18) | Postiz publishes on its own clock |
 | YouTube | ~6-10 uploads/day (API quota) | 3/day native scheduler | Codex owns video uploads |
 | LinkedIn | no official cap; sane = 25/day max | 0 (200 drafts waiting) | boss's own posting method; drafts ready |
+
+Char limits: X 280 - Bluesky 300 - Threads 500 - LinkedIn 3,000.
+Cadence bumped 40 to 60/day on Threads/Bluesky/X on Sep 18 (evening block
+19:00-23:45 added on top of the 9:00-18:45 grid = 60 slots at 15-min spacing).
 
 ## THREADS IS LIVE (Sep 18 evening)
 - Account: blitztheape on Threads, connected via Postiz (id cmu7hxfr0001jlb0yqnr49j2v,
