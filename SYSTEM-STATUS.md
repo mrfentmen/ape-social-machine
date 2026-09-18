@@ -1,4 +1,38 @@
-# Ape AI — Social Media Machine Status (2026-09-17)
+# Ape AI — Social Media Machine Status (2026-09-18)
+
+## LIVE-STATE SNAPSHOT (2026-09-18, session 3)
+
+- **Hashtags: DONE.** All 1,085 X + Bluesky drafts carry `#AskApe` first + up to 2
+  discovery tags (`blitz_pools.pick_tags`, patcher `add_hashtags.py`). Verified:
+  1085/1085 tagged, all under limits, humanize clean.
+- **Bluesky: SCHEDULING LIVE IN THE CLOUD.** Repo `ape-social-machine` runs the
+  bsky-scheduler workflow every 15 min (cron `*/15 * * * *` UTC). Queue committed
+  to the repo: 120 posts, Sep 19–21, every 15 min 09:00–18:45 ET. Workflow posts
+  only what's due (`scheduler.js --max-wait 60`) and commits posted-flags back
+  (double-post safe). Verified no-op run Sep 18: `queue: 120 total, 0 due,
+  no login`. Local scheduler.js must NOT run simultaneously.
+- **X via Postiz: LIVE.** OAuth re-logged Sep 18 (`postiz_mcp.py login`).
+  10 posts scheduled to **Axel Beaumont X only** (ID pinned below): Sep 19,
+  hourly 09:00–18:00 ET, all tagged Blitz voice, batch 1 from drafts_bulk4.
+  Verified via postsListTool: 10 posts, state QUEUE, target = Axel Beaumont.
+  Helper: `postiz/schedule_x_batch.py` (test|all|show); generic caller
+  `postiz/postiz_call.py`. Postiz payload requires HTML `<p>` content,
+  `attachments: []`, `isPremium`, `shortLink`, and settings
+  `post_type=post`, `who_can_reply_post=everyone`.
+- **Hashtag rules:** brand tag `#AskApe` mandatory first, max 3 tags/post
+  (guardrails flag 5+), letters only, tag line always last after blank line.
+
+## ⏰ REMINDER — OCT 1, 2026: MAKE ape-social-machine PRIVATE AGAIN
+
+The repo `mrfentmen/ape-social-machine` was made PUBLIC on 2026-09-18 only because
+the GitHub free-minute quota was exhausted and public repos get unlimited minutes.
+**On Oct 1 the 2,000 private minutes reset -> run:**
+```bash
+gh repo edit mrfentmen/ape-social-machine --visibility private --accept-visibility-change-consequences
+```
+Then verify: `gh repo view mrfentmen/ape-social-machine --json visibility`.
+Drafts are public in the meantime — that was the boss's explicit call.
+
 
 Snapshot of every automated system, what runs where, and what's left.
 Read this before changing anything — especially if Postiz (boss's tool) gets added.
@@ -28,10 +62,30 @@ Read this before changing anything — especially if Postiz (boss's tool) gets a
 - Voice rules: `BRAND-VOICE.md`
 - Nothing scheduled right now. **Next: wire a daily queue like Instagram's.**
 
-### 4. X / Twitter — PAUSED (boss decision)
-- Poster built and authed: `poster-and-scheduler/x/poster_x.py` (as @blitztheape)
-- Blocked on X API credits (402 Payment Required). **Boss chose Postiz instead.**
-- If Postiz handles X: leave our auth alone, just don't double-post here AND there.
+### 4. X / Twitter — Postiz owns it (boss decision) ✅ CONNECTED
+- Old poster still exists (`poster-and-scheduler/x/poster_x.py`) but is superseded.
+- **Postiz connection live since 2026-09-17.** Access via bridge script:
+  `cd ~/Desktop/poster-and-scheduler/postiz && python3 postiz_mcp.py accounts|tools`
+  (OAuth token at ~/.postiz_mcp/token.json, 0600, self-refreshing)
+- **ACCOUNT MAP (from integrationList, read-only):**
+  - Axel Beaumont / x → **MINE — the ONLY allowed Postiz target** (id cmu63e4kz05j5nl0y88yzl0ip)
+  - askApe / x → BOSS — OFF-LIMITS (id cmqh25u0z0698o80y5z8reuf2)
+  - Faizan Sattar / x → BOSS — OFF-LIMITS (id cmqel69w90187pm0ywxyimxn2)
+  - Faizan Sattar / linkedin → BOSS — OFF-LIMITS (id cmqel6pc40189pm0y5vp2dc5g)
+  - AskApeAI / reddit → BOSS — OFF-LIMITS (id cmqh24llw068ko80ylofxb4jn)
+  - TikTok → not connected yet; slot reserved for @blitztheape when added
+- Rule: every Postiz post targets Axel Beaumont's integration ID by pin, never
+  by name lookup. Boss accounts are never passed to posting tools.
+
+### 4b. TikTok — Postiz owns it (boss decision, 2026-09-17)
+- **Direct TikTok API application ABANDONED.** TikTok requires a demo video of a
+  fully built integration before approving an app — impossible pre-build. Boss's call.
+- Nothing was deleted: credentials (client key/secret) + site verification token
+  are in `poster-and-scheduler/.env` (TIKTOK_* vars) if ever revisited.
+- Domain verification for askape.com was never completed (TXT record was never
+  added to Cloudflare). If revisiting, that's step one.
+- **Postiz will post TikTok + X.** Do not build a TikTok poster. Do not connect
+  IG to Postiz (see Postiz rules below).
 
 ### 5. LinkedIn
 - Browser automation in `poster-and-scheduler/linkedin-browser/`, API stub in `linkedin-api/`
@@ -41,14 +95,28 @@ Read this before changing anything — especially if Postiz (boss's tool) gets a
 Postiz is a hosted self-serve scheduler (like Buffer). It can post to IG, X, Bluesky, LinkedIn, etc.
 - **Risk: DOUBLE-POSTING.** If Postiz posts to Instagram while our launchd queue also posts → duplicate content, account flags.
 - **Rule: one owner per platform.** Either Postiz OR our scripts, never both, per account.
-- **Safest split:** Postiz takes X + LinkedIn (the ones we haven't automated). We keep IG + YT (already live and proven).
+- **Safest split (updated 2026-09-17):** Postiz takes X + TikTok (+ LinkedIn if
+  boss uses it there). We keep IG + YT + Bluesky (already live and proven).
+- If Postiz ever takes Bluesky: DISARM our runner first (empty the live queue +
+  disable the workflow) before connecting it there. One owner per account, always.
 - Our IG queue is independent of Postiz — if boss wants Postiz on IG instead, clear `schedule_queue.json` first: set all entries `"posted": true` (or empty the file to `[]`).
+
+## POSTIZ — CONNECTED (2026-09-18, boss-confirmed ownership)
+Bridge script: `poster-and-scheduler/postiz/postiz_mcp.py` (OAuth token at `~/.postiz_mcp/token.json`, 0600).
+Connected accounts (from one read-only `integrationList` call, 2026-09-18):
+- **X "Axel Beaumont"** — id `cmu63e4kz05j5nl0y88yzl0ip` → **OUR X TARGET. Pin this id in every draft.**
+- X "askApe" — id `cmqh25u0z0698o80y5z8reuf2` → unassigned (boss hasn't ruled).
+- X "Faizan Sattar" + LinkedIn "Faizan Sattar" — **BOSS'S PERSONAL ACCOUNTS. Never touch, never post, never disconnect.**
+- Reddit "AskApeAI" — id `cmqh24llw068ko80ylofxb4jn` → unassigned (boss hasn't ruled).
+- TikTok — NOT connected yet; **boss connects it himself in the Postiz UI.**
+- IG / YouTube / Bluesky must NEVER be connected to Postiz (one-owner rule).
+Rules: no post/schedule/draft without explicit "go" on exact content. Read-only check = `python3 postiz_mcp.py accounts`.
 
 ## KNOWN DEBTS (fix eventually)
 1. **rclone shared client_id retirement** — gdrive1 uses rclone's shared Google client, being retired during 2026. Need own Google Cloud client_id before then. All Drive-hosted IG videos depend on this.
 2. **Drive `uc?export=download` links are unofficial** — works (3/3 IG tests), but if IG fetches start failing, check here first.
 3. **X image posts** not wired (needs OAuth 1.0a) — text-only until needed.
-4. **TikTok poster** exists (`ai-video-posters/tiktok/`) but needs app audit for public posts.
+4. **TikTok poster** exists (`ai-video-posters/tiktok/`) but is MOOT: Postiz owns TikTok per boss decision (2026-09-17). Leave it dormant.
 5. **Uninstall stale auth launchd jobs** when sure: `com.apeai.xauth`, `com.apeai.ytauth` (one-time tools, now inert).
 
 ## FILE MAP
@@ -57,10 +125,3 @@ Postiz is a hosted self-serve scheduler (like Buffer). It can post to IG, X, Blu
 - `~/Desktop/poster-and-scheduler/youtube/yt_caption_bank.json` — YT captions
 - `~/Desktop/poster-and-scheduler/x-bluesky/` — Bluesky scheduler (Node)
 - Drive: `gdrive1:blitz-videos/` (83 videos) · source folders untouched: `~/ape-gtm/ugc/blitz/finished/`, `~/Desktop/Blitz videos/`
-
-## ⏰ REMINDER — OCT 1, 2026: MAKE THIS REPO PRIVATE AGAIN
-
-This repo went PUBLIC on 2026-09-18 only to dodge the exhausted GitHub free-minute
-quota (public repos = unlimited minutes). On Oct 1 the private 2,000 minutes reset.
-Run: gh repo edit mrfentmen/ape-social-machine --visibility private --accept-visibility-change-consequences
-Boss approved the public exposure of drafts as a stopgap. No secrets are in git.
