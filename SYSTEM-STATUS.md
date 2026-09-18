@@ -7,10 +7,13 @@
   1085/1085 tagged, all under limits, humanize clean.
 - **Bluesky: SCHEDULING LIVE IN THE CLOUD.** Repo `ape-social-machine` runs the
   bsky-scheduler workflow every 15 min (cron `*/15 * * * *` UTC). Queue committed
-  to the repo: 120 posts, Sep 19–21, every 15 min 09:00–18:45 ET. Workflow posts
-  only what's due (`scheduler.js --max-wait 60`) and commits posted-flags back
-  (double-post safe). Verified no-op run Sep 18: `queue: 120 total, 0 due,
-  no login`. Local scheduler.js must NOT run simultaneously.
+  to the repo: **240 posts, Sep 19–24**, every 15 min 09:00–18:45 ET (40/day).
+  Workflow posts only what's due (`scheduler.js --max-wait 60`) and commits
+  posted-flags back (double-post safe). Verified no-op run Sep 18: `queue: 240
+  total, 0 due, no login`. Extend with:
+  `python3 bsky_build_queue.py --days 3 --start-days <offset> && python3 bsky_build_queue.py --arm`,
+  then copy the queue file into the repo and push. Staging appends + dedupes
+  across batches; pool has ~300 unused Bluesky drafts left after Sep 24.
 - **X via Postiz: LIVE.** OAuth re-logged Sep 18 (`postiz_mcp.py login`).
   10 posts scheduled to **Axel Beaumont X only** (ID pinned below): Sep 19,
   hourly 09:00–18:00 ET, all tagged Blitz voice, batch 1 from drafts_bulk4.
