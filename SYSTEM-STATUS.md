@@ -1,5 +1,13 @@
 # Ape AI — Social Media Machine Status (2026-09-18)
 
+## Sep 18 missed-day incident (RESOLVED)
+Nothing was ever scheduled for Sep 18 (queues started Sep 19). Fill applied:
+16 posts 4-8pm ET on Bluesky (armed in repo queue, fired live, verified) and
+16 on X (Postiz, Axel only, all postIds back). Cause: day-gap in batch 1
+planning. Rule: every load-up must include TODAY if any posting window remains.
+Postiz login expires ~10h; use postiz_mcp.py login --wait 170, or paste the
+127.0.0.1:8765/callback URL to `paste --url` (rescue mode, no listener needed).
+
 ## LIVE-STATE SNAPSHOT (2026-09-18, session 3)
 
 - **Hashtags: DONE.** All 1,085 X + Bluesky drafts carry `#AskApe` first + up to 2
