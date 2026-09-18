@@ -23,6 +23,13 @@ ALLOW = {
     "tab", "tabs",
     "com",  # AskApe.com after punctuation splitting
     "bs",
+    # Brand + persona words (Axel "Blitz" Beaumont character sheet, 2026-09-19)
+    "askapeai", "apeai", "nyc", "xyz", "hodl", "hodling", "bro", "bros",
+    "tp", "sl", "bag", "bags", "degen", "degens", "scalp", "scalper",
+    "scalping", "scalped", "snipe", "sniped", "sniping", "rekt", "fomo",
+    "yeet", "gainz", "bagholder", "bagholders", "unhinged", "coiled",
+    "twitchy", "twitch", "twitches", "flashy", "snappy", "premarket",
+    "afterhours", "tape", "gibbon", "gibbons", "sniper", "snipers",
 }
 
 # ---------------------------------------------------------------- dictionary

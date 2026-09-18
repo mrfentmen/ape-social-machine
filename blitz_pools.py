@@ -112,6 +112,94 @@ CLOSERS = [
     "Plain answers, sources attached. AskApe.com.",
 ]
 
+# ------------------------------------------------- batch 7 pools (2026-09-19)
+# Axel "Blitz" Beaumont character sheet voice: chaotic day trader, scalps,
+# breakouts, gaps, gamer energy, twitch speed. Every line verified with
+# humanize_rules.validate_human before landing here.
+OPENERS_B7 = [
+    "Stop thinking, start clicking.",
+    "Think fast, trade faster.",
+    "I'm not here for the trend. I'm here before it.",
+    "One chart. One shot. That's all I need.",
+    "The open is a boss fight and I main it.",
+    "Premarket alarms are my religion.",
+    "I scalp the open and ghost before lunch.",
+    "Speed is the whole strategy.",
+    "Hesitation is a position. A bad one.",
+    "My stop loss does the praying for me.",
+    "I read the tape like street signs.",
+    "Volatility is not a risk. It's the toy.",
+    "Everyone debates. I execute.",
+    "The gap opens. So do I.",
+    "Entry, exit, respawn.",
+    "Bored money is slow money.",
+    "I don't marry positions. I speed date them.",
+    "The chart moved. So did I.",
+    "Fast hands, faster exits.",
+    "I trade the first hour. That's the whole day.",
+    "Zero emotional baggage. All stop losses.",
+    "The plan is set before the bell rings.",
+    "Breakouts have a sound. I hear it early.",
+    "I'm not chasing. I'm ambushing.",
+    "Scalp season is every season.",
+]
+
+BODIES_B7 = [
+    "Scalp the open, respect the stop, be gone by noon.",
+    "Breakout hits, volume confirms, I'm already halfway out.",
+    "The plan is written before the bell. The bell just starts the game.",
+    "No bias, no bag holding, no stories. Levels, flow, clicks.",
+    "If it doesn't move in the first minutes, it doesn't get my money.",
+    "Risk is one stop loss away from being a rounding error.",
+    "Small size, fast hands, big sample. That's the edge.",
+    "I trade reaction, not prediction. The chart sneezes, I'm gone.",
+    "Every trade gets an exit before it gets an entry. Non negotiable.",
+    "The first hour pays for the whole day. The rest is optional.",
+    "Level breaks, alert fires, plan executes. No thinking mid trade.",
+    "I'm not smarter than anyone here. I'm just gone before they finish their thesis.",
+    "Momentum is a language. I'm fluent.",
+    "The crowd waits for confirmation. I am the confirmation.",
+    "Green is a mood. Exits are a system.",
+    "One setup, drilled until it's boring. Boring wins.",
+    "Gaps fill or they fly. I have a plan for both.",
+    "I don't predict the weather. I bring an umbrella and a jet ski.",
+    "Twitch reflexes, spreadsheet discipline. Weird mix, it works.",
+    "The chart is a game and the tutorial is your own tape.",
+    "No thesis needed at the open. Just flow, levels and fast fingers.",
+    "If my heart rate goes up, my size goes down. Simple math.",
+    "I'd rather miss ten trades than manage one bad one.",
+    "The tape tells the truth early. You just have to listen at speed.",
+    "Profit targets aren't dreams. They're orders waiting to happen.",
+    "Preparation is the cheat code. The bell is just the starting gun.",
+    "I lose small on purpose so I can win big on purpose.",
+    "The alert does the watching. I do the clicking.",
+    "Discipline is the costume. Speed is the superpower.",
+    "Charts don't scare me. Lag does.",
+]
+
+CLOSERS_B7 = [
+    "Think fast, trade faster.",
+    "Stop thinking, start clicking.",
+    "One chart. One shot.",
+    "Speed is the edge. Discipline keeps it.",
+    "Scalp city, population me.",
+    "The exit is the strategy.",
+    "Plan the click. Click the plan.",
+    "Fast in, faster out.",
+    "Bag nothing. Bounce everything.",
+    "The best exit is the one you planned at entry.",
+    "No feelings at the bell. Just levels.",
+    "Respawn, reenter, run it back.",
+    "Alerts on. Ego off.",
+    "The market rewards the prepared click.",
+    "Trade the moment, not the mood.",
+    "Execute, review, repeat.",
+    "If it's not moving, neither am I.",
+    "The open gives. The close keeps.",
+    "Win the first hour and the day follows.",
+    "Small losses are tuition. Pay it fast.",
+]
+
 # ------------------------------------------------- batch 6 pools (2026-09-18)
 # Grounded in the live askape.com product: intel that finds you, what if
 # scenarios, one dashboard for every brokerage, plain English chat, the troop.
@@ -200,21 +288,25 @@ CLOSERS_B6 = [
 # no banned words. Keep total tag count < 5 (guardrails spam rule).
 BRAND_TAGS = ["#AskApe"]
 
+# Tag rule (2026-09-19, per boss): more tags than before. Brand tag first,
+# then AskApeAI, ApeAI, NYC, Finance, Money, XYZ plus discovery staples.
 DISCOVERY_TAGS_X = [
-    "#FinTwit", "#StockMarket", "#Earnings", "#Research", "#Investing",
-    "#Markets", "#Stocks", "#Filings", "#Trading", "#AI",
+    "#AskApeAI", "#ApeAI", "#NYC", "#Finance", "#Money", "#XYZ",
+    "#FinTwit", "#Trading", "#Stocks", "#Markets",
 ]
 
 DISCOVERY_TAGS_BSKY = [
-    "#investing", "#stocks", "#finance", "#markets", "#earnings",
-    "#research", "#AI", "#stockmarket",
+    "#AskApeAI", "#ApeAI", "#NYC", "#finance", "#money", "#XYZ",
+    "#stocks", "#trading", "#markets", "#investing",
 ]
+
+MAX_TAGS = 5
 
 
 def pick_tags(rng, platform: str, budget_chars: int) -> str:
     """Deterministic tag line for a post: brand tag FIRST, then discovery
-    tags up to 3 total. Shrinks to fewer tags if the char budget is tight.
-    Returns '' if even the brand tag doesn't fit. rng must be a
+    tags up to MAX_TAGS total. Shrinks to fewer tags if the char budget is
+    tight. Returns '' if even the brand tag doesn't fit. rng must be a
     random.Random (seeded per post for stable reruns).
     """
     disc = DISCOVERY_TAGS_X if platform == "x" else DISCOVERY_TAGS_BSKY
@@ -225,7 +317,7 @@ def pick_tags(rng, platform: str, budget_chars: int) -> str:
     rest = list(disc)
     rng.shuffle(rest)
     for tag in rest:
-        if len(chosen) >= 3:
+        if len(chosen) >= MAX_TAGS:
             break
         line = " ".join(chosen + [tag])
         if len(line) <= budget_chars:
