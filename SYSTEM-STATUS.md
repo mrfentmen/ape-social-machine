@@ -39,12 +39,17 @@
 - **YouTube: 3 Shorts/day.** Sep 19 scheduled natively via --publish-at
   (blitz-58/59/60, 9am/1pm/5pm ET). Repeat daily: next videos blitz-61+,
   captions rotate from `yt_caption_bank.json`.
-- **Draft pool status:** batch 6 GENERATED Sep 18 (200 X + 200 Bluesky,
-  product-grounded Blitz pools OPENERS_B6/BODIES_B6/CLOSERS_B6, all checks
-  green, 0 dupes vs everything). Ready to load Sep 25+. Next batch after
-  that: generate_bulk_drafts6.py with a new pool block (B7).
-- **Hashtag rules:** brand tag `#AskApe` mandatory first, max 3 tags/post
-  (guardrails flag 5+), letters only, tag line always last after blank line.
+- **Draft pool status:** ~329 unused X drafts left (usable for Bluesky
+  Sep 25+ or more X). Bluesky-voice pool is FULLY USED through Sep 24.
+  **Batch 7 DONE (2026-09-19):** drafts_bulk7.json — 200 X + 200 Bluesky in
+  the Axel "Blitz" Beaumont character-sheet voice (scalps, breakouts, gaps,
+  gamer energy; tagline "Think fast, trade faster."). Use B7 pools for all
+  future Blitz batches. Old batches 1 to 6 sound like a research ape, not
+  the sheet — phase them out for X/Bluesky if the boss wants pure sheet voice.
+- **Hashtag rules (updated 2026-09-19, per boss):** brand tag `#AskApe`
+  FIRST, then AskApeAI / ApeAI / NYC / Finance / Money / XYZ + discovery
+  staples, up to 5 tags/post (MAX_TAGS=5 in blitz_pools.pick_tags). Letters
+  only, tag line always last after blank line.
 
 ## ⏰ REMINDER — OCT 1, 2026: MAKE ape-social-machine PRIVATE AGAIN
 
