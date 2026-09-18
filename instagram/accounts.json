@@ -1,0 +1,11 @@
+{
+  "blitztheape": {
+    "api_host": "<API_HOST>",
+    "access_token": "<ACCESS_TOKEN>",
+    "user_id": "<USER_ID>",
+    "public_base_url": "<PUBLIC_BASE_URL>",
+    "username": "<USERNAME>",
+    "account_type": "<ACCOUNT_TYPE>",
+    "token_obtained": "<TOKEN_OBTAINED>"
+  }
+}

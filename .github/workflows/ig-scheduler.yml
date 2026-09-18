@@ -1,0 +1,114 @@
+name: ig-scheduler
+
+# Cloud Instagram poster. Fires every 15 minutes; posts whatever is due in
+# instagram/schedule_queue.json (which is COMMITTED and pushed back after
+# every run, so nothing double-posts).
+#
+# CUTOVER RULE: the local launchd job com.apeai.igscheduler on the Mac and
+# this workflow must NEVER both be live. One owner at a time. The schedule
+# trigger below is added only at cutover; until then this workflow is
+# manual-only (workflow_dispatch) and inert.
+#
+# Videos are NOT in the repo. The queue references Google Drive files via
+# instagram/drive_urls.json (public direct links); Instagram's servers fetch
+# the video from Google at post time, same as the Mac did.
+#
+# Secrets: IG_ACCESS_TOKEN, IG_USER_ID (repo secrets). The repo's
+# instagram/accounts.json contains placeholders only.
+
+on:
+  workflow_dispatch: {}   # manual test button (always available)
+  # schedule:              # <- UNCOMMENT AT CUTOVER (see header note)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ig-posting
+  cancel-in-progress: false
+
+jobs:
+  post-due:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet requests
+
+      - name: Show queue state (no secrets)
+        working-directory: instagram
+        run: |
+          python3 - <<'PY'
+          import json
+          q = json.load(open("schedule_queue.json"))
+          pending = [i for i in q if i and not i.get("posted") and not i.get("error")]
+          print(f"queue: {len(q)} total, {len(pending)} pending")
+          for i in pending[:3]:
+              print(f"  due {i['at']}: {i['caption'][:50]}")
+          PY
+
+      - name: Post due items
+        id: run
+        working-directory: instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          PENDING=$(python3 -c "
+          import json
+          q = json.load(open('schedule_queue.json'))
+          print(sum(1 for i in q if i and not i.get('posted') and not i.get('error')))
+          ")
+          echo "pending items: $PENDING"
+          if [ "$PENDING" -eq 0 ]; then
+            echo "nothing pending -> no-op"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Cloud safety: never run items by more than 20 minutes late in one
+          # burst (e.g. after a maintenance gap) - post at most 3 per run.
+          DUE=$(python3 -c "
+          import json
+          from datetime import datetime, timezone
+          q = json.load(open('schedule_queue.json'))
+          now = datetime.now(timezone.utc)
+          n = 0
+          for i in q:
+              if i.get('posted') or i.get('error'): continue
+              due = datetime.fromisoformat(i['at'].replace('Z', '+00:00'))
+              if due <= now: n += 1
+          print(min(n, 3))
+          ")
+          echo "items due now (cap 3/run): $DUE"
+          if [ "$DUE" -eq 0 ]; then
+            echo "nothing due this tick -> no-op"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python3 ig_scheduler.py run --max 3 || true
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit queue state back (prevents double-posts)
+        if: steps.run.outputs.changed == 'true'
+        run: |
+          git config user.name "apeai-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add instagram/schedule_queue.json
+          if git diff --cached --quiet; then
+            echo "no queue changes -> nothing to commit"
+          else
+            git commit -m "ig queue state update [skip ci]"
+            if ! git push origin main; then
+              echo "push raced - pulling and retrying once"
+              git pull --rebase origin main
+              git push origin main
+            fi
+          fi
