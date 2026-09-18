@@ -1,0 +1,80 @@
+name: bsky-scheduler
+
+# Fires the Bluesky scheduler near the planned posting times (10:00, 14:00,
+# 18:00 US Eastern -> 14:00, 18:00, 22:00 UTC). The scheduler posts only what
+# is due in the queue file (x-bluesky/bsky_scheduled_posts.json) and exits
+# when the queue is empty or all items are posted.
+#
+# SAFETY: the queue file is gitignored, so a fresh checkout always starts
+# EMPTY -> early runs are no-ops (~1 billable minute). Nothing posts until
+# items are ARMED into the queue (bsky_build_queue.py --arm, then commit the
+# queue file deliberately, or a later committed queue with pending items).
+#
+# Secrets: BSKY_HANDLE + BSKY_APP_PASSWORD (repo secrets, already set).
+# Cron is UTC. GitHub cron drift can be a few minutes; the scheduler fires
+# any overdue item immediately, so late ticks still post on time-ish.
+
+on:
+  schedule:
+    - cron: "2 14 * * *"   # 10:02 ET (EDT)  -> 10:00 slot
+    - cron: "2 18 * * *"   # 14:02 ET (EDT)  -> 14:00 slot
+    - cron: "2 22 * * *"   # 18:02 ET (EDT)  -> 18:00 slot
+  workflow_dispatch: {}    # manual run button, for tests
+
+concurrency:
+  group: bsky-posting
+  cancel-in-progress: false
+
+jobs:
+  post-due:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: x-bluesky/package-lock.json
+
+      - name: Install scheduler deps
+        working-directory: x-bluesky
+        run: npm ci --no-audit --no-fund
+
+      - name: Show queue state (no secrets)
+        run: |
+          if [ -f x-bluesky/bsky_scheduled_posts.json ]; then
+            python3 - <<'PY'
+          import json
+          q = json.load(open("x-bluesky/bsky_scheduled_posts.json"))
+          pending = [i for i in q if i and not i.get("posted")]
+          print(f"queue: {len(q)} total, {len(pending)} pending")
+          for i in pending[:5]:
+              print(f"  due {i['at']}: {i['text'][:60]}...")
+          PY
+          else
+            echo "queue: empty (nothing armed) - no-op run"
+          fi
+
+      - name: Post due items (only if queue has pending items)
+        working-directory: x-bluesky
+        env:
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+        run: |
+          PENDING=$(python3 - <<'PY'
+          import json, os
+          p = "bsky_scheduled_posts.json"
+          if not os.path.exists(p):
+              print("0"); raise SystemExit
+          q = json.load(open(p))
+          print(sum(1 for i in q if i and not i.get("posted")))
+          PY
+          )
+          echo "pending items: $PENDING"
+          if [ "$PENDING" -gt 0 ]; then
+            node src/scheduler.js --check-between
+          else
+            echo "queue empty -> no-op (no login attempted)"
+          fi
