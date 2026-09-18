@@ -19,7 +19,7 @@
     "posted": false,
     "posted_at": null,
     "ig_media_id": null,
-    "error": "[Errno 2] No such file or directory: '/home/runner/work/ape-social-machine/ape-social-machine/instagram/instagram/accounts.json'"
+    "error": null
   },
   {
     "file": "blitz-11.mp4",
