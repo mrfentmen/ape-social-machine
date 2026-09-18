@@ -39,10 +39,10 @@
 - **YouTube: 3 Shorts/day.** Sep 19 scheduled natively via --publish-at
   (blitz-58/59/60, 9am/1pm/5pm ET). Repeat daily: next videos blitz-61+,
   captions rotate from `yt_caption_bank.json`.
-- **Draft pool status:** ~329 unused X drafts left (usable for Bluesky
-  Sep 25+ or more X). Bluesky-voice pool is FULLY USED through Sep 24.
-  Around Sep 22: run generate_bulk_drafts to make batch 6 before Sep 25,
-  or Bluesky/X queues run dry.
+- **Draft pool status:** batch 6 GENERATED Sep 18 (200 X + 200 Bluesky,
+  product-grounded Blitz pools OPENERS_B6/BODIES_B6/CLOSERS_B6, all checks
+  green, 0 dupes vs everything). Ready to load Sep 25+. Next batch after
+  that: generate_bulk_drafts6.py with a new pool block (B7).
 - **Hashtag rules:** brand tag `#AskApe` mandatory first, max 3 tags/post
   (guardrails flag 5+), letters only, tag line always last after blank line.
 

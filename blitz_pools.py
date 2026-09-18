@@ -112,6 +112,88 @@ CLOSERS = [
     "Plain answers, sources attached. AskApe.com.",
 ]
 
+# ------------------------------------------------- batch 6 pools (2026-09-18)
+# Grounded in the live askape.com product: intel that finds you, what if
+# scenarios, one dashboard for every brokerage, plain English chat, the troop.
+OPENERS_B6 = [
+    "I stopped chasing news. The news that matters finds me now.",
+    "I asked a what if question about my biggest position. Got an answer, not a shrug.",
+    "One dashboard. Every bag. Zero tab chaos.",
+    "My brokerage statements used to live in six different apps.",
+    "I sanity check every hot idea before it touches real money.",
+    "Plain English beats analyst gibberish every day of the week.",
+    "The troop shares what works. No suits, no jargon, no noise.",
+    "I used to miss earnings. Now they surface before I wake up.",
+    "My portfolio flagged a risk I never would have caught manually.",
+    "I stopped doomscrolling tickers and started asking better questions.",
+    "The setup found me. I just had to do the reading.",
+    "Wall Street pays millions for this kind of clarity. I pay attention.",
+    "I stopped pretending I would read every filing cold.",
+    "My ape keeps me honest when the hype gets loud.",
+    "Hidden trends in my own portfolio. Found by software. Confirmed by me.",
+    "I used to react to headlines. Now I respond to context.",
+    "Every bag in one place changed how I see my own risk.",
+    "I asked why the stock moved and got the actual why.",
+    "The chat is open at midnight. The questions are free. The judgment stays mine.",
+    "I trade my plan now. The noise can wait outside.",
+    "My watchlist finally watches back.",
+    "Clarity is the edge. Everything else is decoration.",
+    "I stopped screenshotting charts like trading cards.",
+    "The boring layer did the heavy lifting again today.",
+    "I let software find the signal. I still make the call.",
+    "Filing season used to scare me. Now it feeds me.",
+    "I know what I own and why I own it. Finally.",
+    "The trend I missed last quarter found me this quarter.",
+    "I stopped trading on vibes the day I saw my own data clearly.",
+    "Conviction feels different when it comes with receipts.",
+]
+
+BODIES_B6 = [
+    "The signal finds you. Earnings, setups, the stuff that actually touches your bags. Right when it matters, not three days later.",
+    "I ran a what if on the position. Downturn scenario, thesis check, the whole thing. Two minutes instead of a weekend.",
+    "Synced every brokerage. One screen. My actual risk stared back at me and it was not what I assumed.",
+    "I asked for the plain English version of the release. Got it. Sources attached. Judgment still mine.",
+    "The dashboard highlighted a hidden trend across my bags. Small thing. Would have cost me real money to miss.",
+    "Chasing news is a part time job with no pay. Surfacing beats chasing every single week.",
+    "I threw my worst idea at the chat. It survived. That is how you build actual conviction.",
+    "The overview said what moved and why. The commentary said what most people would miss. Both in one screen.",
+    "My risk tolerance is adaptable. My research habits finally match that instead of fighting it.",
+    "The setup arrived with context, not just a chart. Context is where the money hides.",
+    "I stopped managing six apps and started managing one portfolio. Funny how much clearer it gets.",
+    "Asked the hard question about the dip. Got a breakdown, not a pitch. That is the difference.",
+    "The troop trades notes, not rumors. Weird how much faster you learn that way.",
+    "My ape flagged an event on my watchlist for tomorrow. I walked in prepared for once.",
+    "One click gave me the chart, the setup, and the review. The reading still took priority. It always does.",
+    "The insight was digestible. The sources were not optional. Both things can be true.",
+    "I checked the thesis instead of the price. The price eventually agreed.",
+    "Real time movers with actual commentary. Not just green and red rectangles screaming at me.",
+    "The portfolio review took minutes. The decision took longer. Correct order of operations.",
+    "I stopped saving screenshots of takes. I ask follow up questions instead.",
+    "Hidden concentration risk across three bags. Software saw it in seconds. It took me months.",
+    "The breakdown separated what happened from what it means. Most content skips that step entirely.",
+    "Every event that touches my positions, surfaced early. Preparation beats reaction. Every time.",
+    "I asked what would prove me wrong. The answer changed my exit plan. Worth more than any tip.",
+    "The chat explained the filing like a colleague, not a textbook. Retention went way up.",
+    "Syncing the brokerages felt small. Seeing everything in one place was not small at all.",
+    "No jargon wall. No hype spiral. Just the move, the why, and the risks in plain sight.",
+    "The signal came to me tagged and sourced. I verified anyway. Habit now.",
+]
+
+CLOSERS_B6 = [
+    "Ask better questions. AskApe.com.",
+    "One dashboard. Every bag. AskApe.com.",
+    "Let the signal find you. AskApe.com.",
+    "Your ape is waiting. AskApe.com.",
+    "Join the troop. AskApe.com.",
+    "Plain answers, sourced. AskApe.com.",
+    "Sync the bags. See the truth. AskApe.com.",
+    "Ask the hard question. AskApe.com.",
+    "Clarity beats noise. AskApe.com.",
+    "Do the boring layer faster. AskApe.com.",
+    "Surfaced, not chased. AskApe.com.",
+    "The reading just got faster. AskApe.com.",
+]
+
 # ------------------------------------------------------------------ hashtags
 # Blitz tag pools for X + Bluesky. Brand tag first, always included when any
 # tag fits. All letters only (humanize_rules passes them), no figures,
@@ -120,7 +202,7 @@ BRAND_TAGS = ["#AskApe"]
 
 DISCOVERY_TAGS_X = [
     "#FinTwit", "#StockMarket", "#Earnings", "#Research", "#Investing",
-    "#Markets", "#DD", "#Filings", "#Trading", "#AI",
+    "#Markets", "#Stocks", "#Filings", "#Trading", "#AI",
 ]
 
 DISCOVERY_TAGS_BSKY = [
