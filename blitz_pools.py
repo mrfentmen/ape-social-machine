@@ -111,3 +111,41 @@ CLOSERS = [
     "Write the claim down. Revisit it.",
     "Plain answers, sources attached. AskApe.com.",
 ]
+
+# ------------------------------------------------------------------ hashtags
+# Blitz tag pools for X + Bluesky. Brand tag first, always included when any
+# tag fits. All letters only (humanize_rules passes them), no figures,
+# no banned words. Keep total tag count < 5 (guardrails spam rule).
+BRAND_TAGS = ["#AskApe"]
+
+DISCOVERY_TAGS_X = [
+    "#FinTwit", "#StockMarket", "#Earnings", "#Research", "#Investing",
+    "#Markets", "#DD", "#Filings", "#Trading", "#AI",
+]
+
+DISCOVERY_TAGS_BSKY = [
+    "#investing", "#stocks", "#finance", "#markets", "#earnings",
+    "#research", "#AI", "#stockmarket",
+]
+
+
+def pick_tags(rng, platform: str, budget_chars: int) -> str:
+    """Deterministic tag line for a post: brand tag FIRST, then discovery
+    tags up to 3 total. Shrinks to fewer tags if the char budget is tight.
+    Returns '' if even the brand tag doesn't fit. rng must be a
+    random.Random (seeded per post for stable reruns).
+    """
+    disc = DISCOVERY_TAGS_X if platform == "x" else DISCOVERY_TAGS_BSKY
+    brand = BRAND_TAGS[0]
+    if len(brand) > budget_chars:
+        return ""
+    chosen = [brand]
+    rest = list(disc)
+    rng.shuffle(rest)
+    for tag in rest:
+        if len(chosen) >= 3:
+            break
+        line = " ".join(chosen + [tag])
+        if len(line) <= budget_chars:
+            chosen.append(tag)
+    return " ".join(chosen)

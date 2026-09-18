@@ -4,32 +4,37 @@
     {
       "id": "x1",
       "theme": "research time",
-      "text": "Researching one stock used to mean 10 tabs, 3 YouTube videos, and a headache.\n\nNow it's asking \"why did NVDA move today?\" and getting the actual answer in plain English.\n\nThat's the whole product. That's Ape AI.",
-      "post_as": "blitztheape"
+      "text": "Researching one stock used to mean 10 tabs, 3 YouTube videos, and a headache.\n\nNow it's asking \"why did NVDA move today?\" and getting the actual answer in plain English.\n\nThat's the whole product. That's Ape AI.\n\n#AskApe #Filings #FinTwit",
+      "post_as": "blitztheape",
+      "tags": true
     },
     {
       "id": "x2",
       "theme": "corporate jargon cynicism",
-      "text": "The market moves on earnings, rates, and human panic.\n\nNot on whatever \"synergistic headwinds\" means in a fund's latest letter.\n\nApe AI reads the filings so retail investors don't have to pretend they did.",
-      "post_as": "blitztheape"
+      "text": "The market moves on earnings, rates, and human panic.\n\nNot on whatever \"synergistic headwinds\" means in a fund's latest letter.\n\nApe AI reads the filings so retail investors don't have to pretend they did.\n\n#AskApe",
+      "post_as": "blitztheape",
+      "tags": true
     },
     {
       "id": "x3",
       "theme": "headline vs why",
-      "text": "Headline: \"Stock falls 8% on earnings.\"\n\nUseful information: which metric missed, by how much, and whether guidance actually got cut.\n\nThe second part is what Ape AI tells you. The first part is what makes you panic sell.",
-      "post_as": "blitztheape"
+      "text": "Headline: \"Stock falls 8% on earnings.\"\n\nUseful information: which metric missed, by how much, and whether guidance actually got cut.\n\nThe second part is what Ape AI tells you. The first part is what makes you panic sell.\n\n#AskApe #Research #Filings",
+      "post_as": "blitztheape",
+      "tags": true
     },
     {
       "id": "x4",
       "theme": "portfolio honesty",
-      "text": "Most people can't answer: what do I actually own, and why?\n\nConnect your brokerage, and Ape AI lays out your holdings, concentration risk, and what changed. One place, in English.\n\nEducational. Not advice. Just visibility.",
-      "post_as": "blitztheape"
+      "text": "Most people can't answer: what do I actually own, and why?\n\nConnect your brokerage, and Ape AI lays out your holdings, concentration risk, and what changed. One place, in English.\n\nEducational. Not advice. Just visibility.\n\n#AskApe #StockMarket #Markets",
+      "post_as": "blitztheape",
+      "tags": true
     },
     {
       "id": "x5",
       "theme": "retail vs wall street tools",
-      "text": "Institutions pay $20k/seat for research terminals.\n\nRetail gets a headline, a hot take, and vibes.\n\nThat gap is why Ape AI exists. Ask questions. Get answers. Decide for yourself.",
-      "post_as": "blitztheape"
+      "text": "Institutions pay $20k/seat for research terminals.\n\nRetail gets a headline, a hot take, and vibes.\n\nThat gap is why Ape AI exists. Ask questions. Get answers. Decide for yourself.\n\n#AskApe #StockMarket #Earnings",
+      "post_as": "blitztheape",
+      "tags": true
     }
   ],
   "linkedin": [
