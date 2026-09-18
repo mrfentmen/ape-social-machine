@@ -18,7 +18,8 @@ name: ig-scheduler
 
 on:
   workflow_dispatch: {}   # manual test button (always available)
-  # schedule:              # <- UNCOMMENT AT CUTOVER (see header note)
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 min (UTC) - CUTOVER LIVE as of Sep 18
 
 permissions:
   contents: write
