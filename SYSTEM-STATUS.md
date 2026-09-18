@@ -1,5 +1,17 @@
 # Ape AI — Social Media Machine Status (2026-09-18)
 
+## PLATFORM LIMITS + OUR CADENCE (locked Sep 18 evening)
+Rule: posts are ALWAYS spaced 15+ min apart inside any day. Never burst.
+
+| Platform | Hard cap (24h) | Our cadence | Notes |
+|---|---|---|---|
+| Threads | 250 API posts | 40/day | 500 chars; ONE topic tag per post; 24x #AskApe + #Investing/#AI/#Stocks/#Trading rotation |
+| Instagram | ~50 API posts (some docs 100; we HIT it Sep 18, resets midnight) | 20/day | reels via cloud; if blocked, wait for reset, queue self-heals |
+| Bluesky | ~1,666 posts/day theoretical (3 pts/post, 5k pts/h, 35k/day); 300 logins/day | 40/day | no real ceiling; loop runner logs in ~1x/hour, fine |
+| X (via Postiz) | no public per-account cap (old platform cap 2,400/day) | 40/day | Postiz publishes on its own clock |
+| YouTube | ~6-10 uploads/day (API quota) | 3/day native scheduler | Codex owns video uploads |
+| LinkedIn | no official cap; sane = 25/day max | 0 (200 drafts waiting) | boss's own posting method; drafts ready |
+
 ## THREADS IS LIVE (Sep 18 evening)
 - Account: blitztheape on Threads, connected via Postiz (id cmu7hxfr0001jlb0yqnr49j2v,
   pinned in postiz/threads_schedule.py). Boss accounts remain off-limits.
