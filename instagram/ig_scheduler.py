@@ -43,7 +43,11 @@ RCLONE = "/Users/dtaxk/.local/bin/rclone"  # launchd has no PATH; absolute path 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 QUEUE_FILE = os.path.join(HERE, "schedule_queue.json")
-ACCOUNTS_FILE = os.path.join(HERE, "instagram", "accounts.json")
+# accounts.json sits next to this script in the repo (flattened layout);
+# the original Mac layout kept it in a subfolder - support both.
+_cand = [os.path.join(HERE, "accounts.json"),
+         os.path.join(HERE, "instagram", "accounts.json")]
+ACCOUNTS_FILE = next((p for p in _cand if os.path.exists(p)), _cand[0])
 URLS_FILE = os.path.join(HERE, "drive_urls.json")
 DRIVE_REMOTE = "gdrive1:blitz-videos"
 
