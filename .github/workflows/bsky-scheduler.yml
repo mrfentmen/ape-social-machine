@@ -1,25 +1,24 @@
 name: bsky-scheduler
 
-# Fires the Bluesky scheduler near the planned posting times (10:00, 14:00,
-# 18:00 US Eastern -> 14:00, 18:00, 22:00 UTC). The scheduler posts only what
-# is due in the queue file (x-bluesky/bsky_scheduled_posts.json) and exits
-# when the queue is empty or all items are posted.
+# Cloud Bluesky poster. Fires every 15 minutes; the scheduler posts only
+# items whose due time is now or within 60s (--max-wait 60) and exits.
+# Outside the 09:00-18:45 ET window nothing is due -> no-op run.
 #
-# SAFETY: the queue file is gitignored, so a fresh checkout always starts
-# EMPTY -> early runs are no-ops (~1 billable minute). Nothing posts until
-# items are ARMED into the queue (bsky_build_queue.py --arm, then commit the
-# queue file deliberately, or a later committed queue with pending items).
+# STATE: the queue file (x-bluesky/bsky_scheduled_posts.json) IS tracked in
+# git. After any change (posted flags, failures) the job commits it back to
+# main, so the next run sees fresh state and nothing double-posts. If there
+# is nothing to commit, the commit step no-ops quietly.
 #
 # Secrets: BSKY_HANDLE + BSKY_APP_PASSWORD (repo secrets, already set).
-# Cron is UTC. GitHub cron drift can be a few minutes; the scheduler fires
-# any overdue item immediately, so late ticks still post on time-ish.
+# Cron is UTC; the scheduler fires any overdue item on the next tick.
 
 on:
   schedule:
-    - cron: "2 14 * * *"   # 10:02 ET (EDT)  -> 10:00 slot
-    - cron: "2 18 * * *"   # 14:02 ET (EDT)  -> 14:00 slot
-    - cron: "2 22 * * *"   # 18:02 ET (EDT)  -> 18:00 slot
-  workflow_dispatch: {}    # manual run button, for tests
+    - cron: "*/15 * * * *"   # every 15 minutes (cron is UTC; ET = UTC-4)
+  workflow_dispatch: {}      # manual run button, for tests
+
+permissions:
+  contents: write
 
 concurrency:
   group: bsky-posting
@@ -31,6 +30,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
@@ -50,31 +51,50 @@ jobs:
           q = json.load(open("x-bluesky/bsky_scheduled_posts.json"))
           pending = [i for i in q if i and not i.get("posted")]
           print(f"queue: {len(q)} total, {len(pending)} pending")
-          for i in pending[:5]:
+          for i in pending[:3]:
               print(f"  due {i['at']}: {i['text'][:60]}...")
           PY
           else
-            echo "queue: empty (nothing armed) - no-op run"
+            echo "queue file missing -> no-op run"
           fi
 
-      - name: Post due items (only if queue has pending items)
+      - name: Post due items
         working-directory: x-bluesky
         env:
           BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
           BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
         run: |
-          PENDING=$(python3 - <<'PY'
-          import json, os
-          p = "bsky_scheduled_posts.json"
-          if not os.path.exists(p):
-              print("0"); raise SystemExit
-          q = json.load(open(p))
-          print(sum(1 for i in q if i and not i.get("posted")))
-          PY
-          )
-          echo "pending items: $PENDING"
-          if [ "$PENDING" -gt 0 ]; then
-            node src/scheduler.js --check-between
+          if [ ! -f bsky_scheduled_posts.json ]; then
+            echo "no queue file -> no-op"
+            exit 0
+          fi
+          DUE=$(python3 -c "
+          import json, time
+          q = json.load(open('bsky_scheduled_posts.json'))
+          now = time.time()
+          due = sum(1 for i in q if i and not i.get('posted')
+                    and time.mktime(time.strptime(i['at'].replace('Z', '+0000'), '%Y-%m-%dT%H:%M:%S%z')) <= now + 60)
+          print(due)
+          " 2>/dev/null || echo 0)
+          echo "items due now: $DUE"
+          if [ "$DUE" -gt 0 ]; then
+            node src/scheduler.js --max-wait 60
           else
-            echo "queue empty -> no-op (no login attempted)"
+            echo "nothing due this tick -> no-op (no login)"
+          fi
+
+      - name: Commit queue state back (prevents double-posts)
+        run: |
+          git config user.name "apeai-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add x-bluesky/bsky_scheduled_posts.json
+          if git diff --cached --quiet; then
+            echo "no queue changes -> nothing to commit"
+          else
+            git commit -m "bsky queue state update [skip ci]"
+            if ! git push origin main; then
+              echo "push raced with another run - pulling and retrying once"
+              git pull --rebase origin main
+              git push origin main
+            fi
           fi

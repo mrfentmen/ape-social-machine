@@ -5,9 +5,10 @@
 x-bluesky/.env
 
 # machine state (lives locally, not in git)
-x-bluesky/bsky_scheduled_posts.json
 x-bluesky/bsky_posts_sent.txt
 bsky_queue_staging.json
+# NOTE: x-bluesky/bsky_scheduled_posts.json IS tracked on purpose:
+# the cloud workflow commits posted-flags back so nothing double-posts.
 
 # node
 node_modules/

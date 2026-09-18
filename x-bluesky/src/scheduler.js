@@ -190,7 +190,7 @@ function cmdClear() {
   console.log("Queue cleared.");
 }
 
-async function cmdRun(dryRun, checkBetween) {
+async function cmdRun(dryRun, checkBetween, maxWaitSec = 0) {
   let queue = loadQueue().filter((i) => i && !i.posted);
   if (queue.length === 0) {
     console.log("Nothing to do — queue is empty or all posts marked posted.");
@@ -214,6 +214,12 @@ async function cmdRun(dryRun, checkBetween) {
   const agent = await getAgent();
   for (const [i, item] of queue.entries()) {
     const delay = Date.parse(item.at) - Date.now();
+    if (delay > maxWaitSec * 1000) {
+      console.log(
+        `⏭️ Skipping ${item.kind} due ${item.at} — too far out (max wait ${maxWaitSec}s): "${item.text.slice(0, 60)}…"`
+      );
+      continue;
+    }
     if (delay > 0) {
       console.log(
         `⏳ Sleeping ${Math.round(delay / 1000)}s until ${item.at} for ${item.kind}: "${item.text.slice(0, 60)}…"`
@@ -261,7 +267,9 @@ async function main() {
 
   const dryRun = argv.includes("--dry");
   const checkBetween = argv.includes("--check-between");
-  return cmdRun(dryRun, checkBetween);
+  const maxWaitIdx = argv.indexOf("--max-wait");
+  const maxWait = maxWaitIdx !== -1 ? Number(argv[maxWaitIdx + 1]) || 0 : 0;
+  return cmdRun(dryRun, checkBetween, maxWait);
 }
 
 main().catch((err) => {

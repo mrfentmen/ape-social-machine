@@ -6,11 +6,14 @@ in bsky_queue_staging.json. It NEVER touches the live scheduler queue
 staging file exists. Nothing posts from this script itself; posting only
 happens if the human runs the scheduler with the live queue armed.
 
-Plan shape (SYSTEM-STATUS.md Bluesky goal, like Instagram's machine):
-  3 posts/day, spaced ~4h apart, starting tomorrow 10:00 local.
+Plan shape (user cadence, Sep 2026):
+  Posts every 15 minutes from 09:00 to 18:45 local = 40 posts/day,
+  starting tomorrow. Runs in the CLOUD via GitHub Actions (repo
+  ape-social-machine); the local scheduler.js must NOT also run, or you
+  double-post. Cloud owns Bluesky.
 
 Usage:
-  python3 bsky_build_queue.py                  # build staging plan (3 days x 3)
+  python3 bsky_build_queue.py                  # build staging plan (3 days x 40)
   python3 bsky_build_queue.py --days 7         # longer plan
   python3 bsky_build_queue.py --show           # print current staging plan
   python3 bsky_build_queue.py --arm            # copy staging -> live scheduler queue
@@ -26,14 +29,16 @@ from datetime import datetime, timedelta, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 LOCAL_TZ = datetime.now().astimezone().tzinfo
 
-DRAFT_FILES = ["drafts_bulk4.json", "drafts_bulk5.json"]  # newest Blitz voice first
+DRAFT_FILES = ["drafts_bulk.json", "drafts_bulk2.json", "drafts_bulk3.json",
+               "drafts_bulk4.json", "drafts_bulk5.json"]  # tagged Blitz voice
 STAGING = os.path.join(HERE, "bsky_queue_staging.json")
 LIVE = os.path.join(HERE, "x-bluesky", "bsky_scheduled_posts.json")
 SENT_LOG = os.path.join(HERE, "x-bluesky", "bsky_posts_sent.txt")
 
-POSTS_PER_DAY = 3
-HOURS_BETWEEN = 4
-START_HOUR = 10  # 10:00 local like the IG posting window
+START_HOUR = 9    # first post 09:00 local
+END_HOUR = 19     # last slot before 19:00 -> 18:45
+STEP_MIN = 15
+POSTS_PER_DAY = (END_HOUR - START_HOUR) * 60 // STEP_MIN  # 40
 
 
 def norm(t):
@@ -76,6 +81,14 @@ def load_draft_pool():
 
 def build_plan(days: int) -> list:
     pool = load_draft_pool()
+    # Don't re-stage drafts already sitting in the live queue.
+    queued_texts = set()
+    if os.path.exists(LIVE):
+        with open(LIVE) as f:
+            for item in json.load(f):
+                if item and not item.get("posted"):
+                    queued_texts.add(norm(item["text"]))
+    pool = [d for d in pool if norm(d["text"]) not in queued_texts]
     if len(pool) < days * POSTS_PER_DAY:
         raise SystemExit(f"not enough unused drafts: have {len(pool)}, "
                          f"need {days * POSTS_PER_DAY}. Generate more or add files to DRAFT_FILES.")
@@ -89,7 +102,9 @@ def build_plan(days: int) -> list:
     i = 0
     for day in range(days):
         for slot in range(POSTS_PER_DAY):
-            when = tomorrow + timedelta(days=day, hours=slot * HOURS_BETWEEN)
+            when = tomorrow + timedelta(days=day,
+                                        hours=slot * STEP_MIN // 60,
+                                        minutes=(slot * STEP_MIN) % 60)
             d = chosen[i]
             i += 1
             plan.append({
@@ -172,7 +187,7 @@ def main():
     with open(STAGING, "w") as f:
         json.dump(plan, f, indent=2)
     print(f"staged {len(plan)} posts over {days} days "
-          f"({POSTS_PER_DAY}/day, {HOURS_BETWEEN}h apart, from {START_HOUR}:00 local)")
+          f"({POSTS_PER_DAY}/day, every {STEP_MIN}min {START_HOUR}:00-{END_HOUR - 1}:45 local)")
     print(f"wrote {STAGING}")
     print("NOTHING IS SCHEDULED YET. Review with --show, then arm with --arm when you say go.")
 
