@@ -2404,9 +2404,11 @@
     "text": "Scalp season is every season.\n\nIf it doesn't move in the first minutes, it doesn't get my money.\n\nAlerts on. Ego off.\n\n#AskApe #NYC #AskApeAI #XYZ #money",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mvsxjwmlvt2z",
+    "posted_at": "2026-09-18T20:02:03.924Z"
   },
   {
     "at": "2026-09-18T20:15:00Z",
