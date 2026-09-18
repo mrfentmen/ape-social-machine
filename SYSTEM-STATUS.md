@@ -6,7 +6,7 @@ Rule: posts are ALWAYS spaced 15+ min apart inside any day. Never burst.
 | Platform | Hard cap (24h) | Our cadence | Notes |
 |---|---|---|---|
 | Threads | 250 API posts | 60/day (LIVE: 640 scheduled Sep 18-30) | 500 char max (sweet spot 200-450); ONE topic tag per post; if body mentions AskApe, tag = #AskApe, else rotate #Investing/#AI/#Stocks/#Trading |
-| Instagram | 100/day standalone API (boss's Meta Business Suite key); Postiz path also available | 20/day now; PLAN: 100/day at 10-min spacing (runner verified capable; needs queue rebuild; NOT activated - awaiting go) | reels via cloud; rate-limit block resets on rolling window |
+| Instagram | 100/day standalone API (boss's Meta Business Suite key); Postiz path also available | 100/day ACTIVE Sep 19-24: 10:00am-9:57pm ET, 7m15s spacing (600 slots armed; old 20/day retired; tonight stays quiet for the rate-limit reset) | reels via cloud; Sep 18 block was Meta rate-limit, resets midnight |
 | Bluesky | ~1,666 posts/day (3 pts/post, 5k pts/h, 35k/day); 300 logins/day | 60/day (LIVE: 736 queued Sep 18-30) | no real ceiling; loop runner logs in ~1x/hour, fine |
 | X (via Postiz) | no public per-account cap (old platform cap 2,400/day) | 60/day (LIVE: 660 scheduled Sep 18-30) | Postiz publishes on its own clock |
 | YouTube | ~6-10 uploads/day (API quota) | 3/day native scheduler | Codex owns video uploads |
@@ -18,9 +18,11 @@ Cadence bumped 40 to 60/day on Threads/Bluesky/X on Sep 18 (evening block
 Expansion is SHIPPED: Threads 640 + X 660 + BSKY 736 scheduled Sep 18-30.
 Global dedupe note: all platforms draw from one shared pool; 831 unused
 sheet-voice drafts remain - generate batch 11 within ~2 days.
-IG 100/day plan (boss idea Sep 18): 10-min spacing, 100 slots/day, ~4 days
-reserve per build; runner already capable (2-min ticks, cap 5). Needs a
-fresh 10-min-spaced queue build + boss go before activation.
+IG 100/day ACTIVATED (boss idea Sep 18, armed same night): 100 slots/day ET
+10:00am-9:57:45pm at 7m15s spacing (10-min spacing only fits 72 in 12h).
+Sep 19-24 covered (600 slots). Videos round-robined across all 83 Drive
+files, never twice within a day. Captions rotate 0,1,2 per the bank note.
+To extend Sep 25+: rerun the queue-builder with --posts 100 before Sep 23.
 
 ## THREADS IS LIVE (Sep 18 evening)
 - Account: blitztheape on Threads, connected via Postiz (id cmu7hxfr0001jlb0yqnr49j2v,
