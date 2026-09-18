@@ -79,32 +79,39 @@ def load_draft_pool():
     return pool
 
 
-def build_plan(days: int) -> list:
+def build_plan(days: int, start_offset_days: int = 1) -> list:
     pool = load_draft_pool()
-    # Don't re-stage drafts already sitting in the live queue.
-    queued_texts = set()
+    # Don't re-stage drafts already pending in the live queue or already
+    # staged (queued or not) — dedupe across batches.
+    used_texts = set()
     if os.path.exists(LIVE):
         with open(LIVE) as f:
             for item in json.load(f):
                 if item and not item.get("posted"):
-                    queued_texts.add(norm(item["text"]))
-    pool = [d for d in pool if norm(d["text"]) not in queued_texts]
+                    used_texts.add(norm(item["text"]))
+    existing_staging = []
+    if os.path.exists(STAGING):
+        with open(STAGING) as f:
+            existing_staging = json.load(f)
+        for p in existing_staging:
+            used_texts.add(norm(p["text"]))
+    pool = [d for d in pool if norm(d["text"]) not in used_texts]
     if len(pool) < days * POSTS_PER_DAY:
         raise SystemExit(f"not enough unused drafts: have {len(pool)}, "
                          f"need {days * POSTS_PER_DAY}. Generate more or add files to DRAFT_FILES.")
-    r = random.Random(20260921)
+    r = random.Random(f"bsky-{start_offset_days}-{days}")
     r.shuffle(pool)
     chosen = pool[:days * POSTS_PER_DAY]
 
     plan = []
-    tomorrow = (datetime.now(LOCAL_TZ) + timedelta(days=1)).replace(
+    start_day = (datetime.now(LOCAL_TZ) + timedelta(days=start_offset_days)).replace(
         hour=START_HOUR, minute=0, second=0, microsecond=0)
     i = 0
     for day in range(days):
         for slot in range(POSTS_PER_DAY):
-            when = tomorrow + timedelta(days=day,
-                                        hours=slot * STEP_MIN // 60,
-                                        minutes=(slot * STEP_MIN) % 60)
+            when = start_day + timedelta(days=day,
+                                         hours=slot * STEP_MIN // 60,
+                                         minutes=(slot * STEP_MIN) % 60)
             d = chosen[i]
             i += 1
             plan.append({
@@ -179,16 +186,28 @@ def main():
         return cmd_disarm()
     if "--arm" in sys.argv:
         return cmd_arm()
-    days = 3
+    days, start_days = 3, 1
     for i, a in enumerate(sys.argv):
         if a == "--days":
             days = int(sys.argv[i + 1])
-    plan = build_plan(days)
+        if a == "--start-days":
+            start_days = int(sys.argv[i + 1])
+    plan = build_plan(days, start_days)
+
+    # Append to staging (dedupe on exact slot+text) so batches accumulate.
+    existing = []
+    if os.path.exists(STAGING):
+        with open(STAGING) as f:
+            existing = json.load(f)
+    known = {(p["at_local"], norm(p["text"])) for p in existing}
+    added = [p for p in plan if (p["at_local"], norm(p["text"])) not in known]
+    merged = existing + added
     with open(STAGING, "w") as f:
-        json.dump(plan, f, indent=2)
-    print(f"staged {len(plan)} posts over {days} days "
-          f"({POSTS_PER_DAY}/day, every {STEP_MIN}min {START_HOUR}:00-{END_HOUR - 1}:45 local)")
-    print(f"wrote {STAGING}")
+        json.dump(merged, f, indent=2)
+    print(f"staged {len(added)} new posts over {days} days "
+          f"(start in {start_days} day(s), {POSTS_PER_DAY}/day, "
+          f"every {STEP_MIN}min {START_HOUR}:00-{END_HOUR - 1}:45 local); "
+          f"staging now holds {len(merged)}")
     print("NOTHING IS SCHEDULED YET. Review with --show, then arm with --arm when you say go.")
 
 
