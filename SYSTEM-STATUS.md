@@ -54,6 +54,14 @@
   MU, NBIS, CRWV), Intel comeback, Reddit/SpaceX retail darlings, 0DTE surge,
   leveraged ETFs, 24h sessions, crypto. OPENERS_B9/BODIES_B9/CLOSERS_B9 pools.
   Tickers + slang added to humanize_rules allowlist. No figures, no advice.
+- **Batch 10 DONE (2026-09-19 night):** drafts_bulk10.json — 200 X + 200
+  Bluesky (Blitz persona, B7+B9 pools mixed) + 200 LinkedIn (company-page
+  corporate voice, plain language, no gamer talk, disclaimer + hashtags on
+  all). Deduped vs everything. DRAFTS ONLY: LinkedIn/X/Bluesky nothing
+  scheduled pending boss approval. YouTube: boss said Codex handles videos;
+  yt_daily_batch.py exists in youtube/ (3/4/3 spread, 10am-5pm ET, cloud
+  ready with drive_urls) but is NOT wired to a workflow. YT secrets set in
+  repo (YT_CLIENT_ID/SECRET/REFRESH_TOKEN).
 - **Queue mix (2026-09-19):** pending Bluesky queue is now a MIX: every 3rd
   slot replaced with a batch 7 sheet-voice post (78 of 240, ~13/day through
   Sep 24). Times unchanged, zero dupes, cloud verified (240 pending no-op run).
