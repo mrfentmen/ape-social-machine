@@ -1,5 +1,18 @@
 # Ape AI — Social Media Machine Status (2026-09-18)
 
+## Sep 18 evening fixes (X + Bluesky only; IG out of scope)
+- **Dense loop runners shipped.** GitHub scheduled runs were firing hours late
+  (cron unreliable). Both bsky + ig workflows now run a ~58-min internal loop
+  (bsky: 60s ticks, ig: 120s ticks, cap 5/tick) with per-tick commit +
+  rebase-retry push. Proven live: 20:30 + 20:45 UTC slots fired on time.
+- **Git-race hole closed.** A lost push previously dropped a posted flag
+  (would have double-posted). Reconciled against live feed; loop now retries
+  pushes 3x with rebase until remote has all state.
+- **Queue coverage:** Bluesky armed through Sep 30 (496 total), X scheduled
+  through Sep 30 via Postiz (Sep 25-30 batch of 240 all accepted, Axel only).
+- **Postiz login:** expires ~10h. Renew via `postiz_mcp.py login --wait 170`
+  or paste the 127.0.0.1:8765/callback URL to `paste --url` (rescue mode).
+
 ## Sep 18 missed-day incident (RESOLVED)
 Nothing was ever scheduled for Sep 18 (queues started Sep 19). Fill applied:
 16 posts 4-8pm ET on Bluesky (armed in repo queue, fired live, verified) and
