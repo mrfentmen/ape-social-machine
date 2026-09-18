@@ -25,19 +25,17 @@
   `attachments: []`, `isPremium`, `shortLink`, and settings
   `post_type=post`, `who_can_reply_post=everyone`. Live-post test PASSED
   Sep 18 (type:"now" -> PUBLISHED).
-- **Instagram: loaded through Sep 24** (140 pending, 20/day). Videos recycle
-  automatically when the Drive pool runs dry (`build_day_queue.py` recycler
-  fixed Sep 18: pending-but-unposted videos now count as freshest).
-  **CLOUD MIRROR STAGED, NOT LIVE** (Sep 18): repo `ape-social-machine`
-  `instagram/` has the script + queue + workflow `ig-scheduler.yml`
-  (manual-only, verified no-op run). Secrets IG_ACCESS_TOKEN + IG_USER_ID set.
-  launchd `com.apeai.igscheduler` is still the ONLY owner. Cutover when boss
-  says go: (1) `launchctl unload ~/Library/LaunchAgents/com.apeai.igscheduler.plist`,
-  (2) sync `schedule_queue.json` into the repo + push,
-  (3) uncomment the `schedule:` block (cron `*/15 * * * *`) in ig-scheduler.yml + push.
-  Rollback = re-comment cron, re-load launchd. Token: long-lived, refresh
-  monthly via local `instagram/refresh_ig.py`, then `gh secret set
-  IG_ACCESS_TOKEN` again from accounts.json.
+- **Instagram: CLOUD-OWNED since Sep 18 08:07 UTC.** launchd
+  `com.apeai.igscheduler` UNLOADED (plist kept for rollback: `launchctl load
+  ~/Library/LaunchAgents/com.apeai.igscheduler.plist`). Cloud workflow
+  `ig-scheduler.yml` in repo `ape-social-machine` fires every 15 min, posts
+  max 3/run, commits queue state back. Canary post PROVED the chain
+  (media_id 17970182568152716). Queue in repo: 139 pending through Sep 24.
+  Top-up ritual is now: run build_day_queue.py locally, then copy
+  `~/Desktop/ai-video-posters/schedule_queue.json` into the repo and push.
+  Token refresh monthly: run local `refresh_ig.py`, then re-set the
+  IG_ACCESS_TOKEN secret. Videos stay on Google Drive (no Drive deletes
+  from cloud; all queue items have delete_from_drive=false).
 - **YouTube: 3 Shorts/day.** Sep 19 scheduled natively via --publish-at
   (blitz-58/59/60, 9am/1pm/5pm ET). Repeat daily: next videos blitz-61+,
   captions rotate from `yt_caption_bank.json`.
