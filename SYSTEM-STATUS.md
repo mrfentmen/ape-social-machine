@@ -14,14 +14,27 @@
   `python3 bsky_build_queue.py --days 3 --start-days <offset> && python3 bsky_build_queue.py --arm`,
   then copy the queue file into the repo and push. Staging appends + dedupes
   across batches; pool has ~300 unused Bluesky drafts left after Sep 24.
-- **X via Postiz: LIVE.** OAuth re-logged Sep 18 (`postiz_mcp.py login`).
-  10 posts scheduled to **Axel Beaumont X only** (ID pinned below): Sep 19,
-  hourly 09:00–18:00 ET, all tagged Blitz voice, batch 1 from drafts_bulk4.
-  Verified via postsListTool: 10 posts, state QUEUE, target = Axel Beaumont.
-  Helper: `postiz/schedule_x_batch.py` (test|all|show); generic caller
+- **X via Postiz: FULLY LOADED through Sep 24.** OAuth re-logged Sep 18
+  (`postiz_mcp.py login`). 210 posts scheduled to **Axel Beaumont X only**
+  (ID pinned below): batch 1 = 10 (Sep 19, hourly), batch 2 = 200 (Sep 20–24,
+  40/day, every 15 min 09:00–18:45 ET). All tagged Blitz voice, all deduped
+  against the Bluesky queue. Verified via postsListTool: target = Axel
+  Beaumont on every post. Helper: `postiz/schedule_x_batch.py
+  show|test|all --file <name> --chunk 40`; generic caller
   `postiz/postiz_call.py`. Postiz payload requires HTML `<p>` content,
   `attachments: []`, `isPremium`, `shortLink`, and settings
-  `post_type=post`, `who_can_reply_post=everyone`.
+  `post_type=post`, `who_can_reply_post=everyone`. Live-post test PASSED
+  Sep 18 (type:"now" -> PUBLISHED).
+- **Instagram: loaded through Sep 24** (140 pending, 20/day). Videos recycle
+  automatically when the Drive pool runs dry (`build_day_queue.py` recycler
+  fixed Sep 18: pending-but-unposted videos now count as freshest).
+- **YouTube: 3 Shorts/day.** Sep 19 scheduled natively via --publish-at
+  (blitz-58/59/60, 9am/1pm/5pm ET). Repeat daily: next videos blitz-61+,
+  captions rotate from `yt_caption_bank.json`.
+- **Draft pool status:** ~329 unused X drafts left (usable for Bluesky
+  Sep 25+ or more X). Bluesky-voice pool is FULLY USED through Sep 24.
+  Around Sep 22: run generate_bulk_drafts to make batch 6 before Sep 25,
+  or Bluesky/X queues run dry.
 - **Hashtag rules:** brand tag `#AskApe` mandatory first, max 3 tags/post
   (guardrails flag 5+), letters only, tag line always last after blank line.
 

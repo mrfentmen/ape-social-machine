@@ -5,9 +5,9 @@ Target: Axel Beaumont X integration ONLY (cmu63e4kz05j5nl0y88yzl0ip).
 Boss accounts are never touched.
 
 Usage:
-  python3 schedule_x_batch.py test      # schedule ONLY the first post
-  python3 schedule_x_batch.py all       # schedule every post not yet scheduled
-  python3 schedule_x_batch.py show      # print the plan, call nothing
+  python3 schedule_x_batch.py show [--file F]     # print the plan, call nothing
+  python3 schedule_x_batch.py test [--file F]     # schedule ONLY the first pending post
+  python3 schedule_x_batch.py all [--file F] [--chunk N]  # schedule everything pending, N per call (default 40)
 """
 
 import asyncio
@@ -78,43 +78,73 @@ def save_done(done):
         json.dump(sorted(done), f, indent=2)
 
 
+def parse_args():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("mode", choices=["show", "test", "all"])
+    ap.add_argument("--file", default=None, help="staging file (default: x_batch1_staging.json)")
+    ap.add_argument("--chunk", type=int, default=40)
+    return ap.parse_args()
+
+
+def staging_path(file_arg):
+    name = file_arg or "x_batch1_staging.json"
+    if os.path.sep not in name and not name.endswith(".json"):
+        name += "_staging.json"
+    return os.path.join(HERE, name)
+
+
+def marker_path(file_arg):
+    base = os.path.basename(staging_path(file_arg)).replace("_staging.json", "")
+    return os.path.join(HERE, f"{base}_scheduled.json")
+
+
 def main():
-    mode = sys.argv[1] if len(sys.argv) > 1 else "show"
+    args = parse_args()
+    STAGING = staging_path(args.file)
+    SCHEDULED_MARKER = marker_path(args.file)
     with open(STAGING) as f:
         posts = json.load(f)
     done = load_done()
 
-    if mode == "show":
+    if args.mode == "show":
         for p in posts:
             mark = "DONE" if p["source"] in done else "todo"
             print(f"[{mark}] {p['at_local'][:16]} | {p['text'][:70].replace(chr(10), ' / ')}")
-        print(f"\ntarget: Axel Beaumont X only ({X_INTEGRATION_ID})")
+        print(f"\ntarget: Axel Beaumont X only ({X_INTEGRATION_ID}); "
+              f"todo: {sum(1 for p in posts if p['source'] not in done)}")
         return
 
     todo = [p for p in posts if p["source"] not in done]
-    if mode == "test":
+    if args.mode == "test":
         todo = todo[:1]
     if not todo:
         print("nothing to schedule (all done)")
         return
-    print(f"scheduling {len(todo)} post(s) to Axel Beaumont X ({X_INTEGRATION_ID})...")
-    for p in todo:
-        print(f"  {p['at_utc']} | {p['text'][:60].replace(chr(10), ' / ')}")
+    total = len(todo)
+    print(f"scheduling {total} post(s) to Axel Beaumont X ({X_INTEGRATION_ID}) in "
+          f"chunks of {args.chunk}...")
 
-    out, is_err = asyncio.run(schedule(todo, X_INTEGRATION_ID))
-    print(out)
-    # Postiz returns validation errors inside the text payload, not via isError.
-    if is_err or '"errors"' in out or 'must be' in out or 'Required' in out:
-        print("TOOL REPORTED ERROR - nothing marked done")
-        # roll back the premature marker from the earlier bad run
-        for p in todo:
-            done.discard(p["source"])
+    sent = 0
+    for start in range(0, total, args.chunk):
+        chunk = todo[start:start + args.chunk]
+        for p in chunk:
+            print(f"  {p['at_utc']} | {p['text'][:60].replace(chr(10), ' / ')}")
+        out, is_err = asyncio.run(schedule(chunk, X_INTEGRATION_ID))
+        print(out)
+        if is_err or '"errors"' in out or 'must be' in out or 'Required' in out:
+            print(f"TOOL REPORTED ERROR at chunk starting {start} - stopping, "
+                  f"{sent} marked done so far")
+            for p in chunk:
+                done.discard(p["source"])
+            save_done(done)
+            sys.exit(1)
+        for p in chunk:
+            done.add(p["source"])
         save_done(done)
-        sys.exit(1)
-    for p in todo:
-        done.add(p["source"])
-    save_done(done)
-    print(f"marked {len(todo)} scheduled")
+        sent += len(chunk)
+        print(f"--- chunk done: {sent}/{total} scheduled ---")
+    print(f"marked {sent} scheduled")
 
 
 if __name__ == "__main__":
