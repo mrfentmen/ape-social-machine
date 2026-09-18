@@ -19,7 +19,7 @@ name: ig-scheduler
 on:
   workflow_dispatch: {}   # manual test button (always available)
   schedule:
-    - cron: "*/15 * * * *"   # every 15 min (UTC) - CUTOVER LIVE as of Sep 18
+    - cron: "0 * * * *"      # hourly: each run loops ~58min internally (dense)
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ concurrency:
 jobs:
   post-due:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
         with:
@@ -56,27 +56,23 @@ jobs:
               print(f"  due {i['at']}: {i['caption'][:50]}")
           PY
 
-      - name: Post due items
+      - name: Post due items (58-min dense loop)
         id: run
         working-directory: instagram
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
         run: |
-          PENDING=$(python3 -c "
-          import json
-          q = json.load(open('schedule_queue.json'))
-          print(sum(1 for i in q if i and not i.get('posted') and not i.get('error')))
-          ")
-          echo "pending items: $PENDING"
-          if [ "$PENDING" -eq 0 ]; then
-            echo "nothing pending -> no-op"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          # Cloud safety: never run items by more than 20 minutes late in one
-          # burst (e.g. after a maintenance gap) - post at most 3 per run.
-          DUE=$(python3 -c "
+          # GitHub scheduled runs can lag by hours; this loop posts on a
+          # 2-minute internal tick for ~58 minutes, independent of cron.
+          # State is committed back after EVERY posting tick so a mid-run
+          # crash can never cause double-posts.
+          git config user.name "apeai-bot"
+          git config user.email "actions@users.noreply.github.com"
+          END=$(( $(date +%s) + 3480 ))
+          CHANGED=false
+          while [ $(date +%s) -lt $END ]; do
+            DUE=$(python3 -c "
           import json
           from datetime import datetime, timezone
           q = json.load(open('schedule_queue.json'))
@@ -86,16 +82,20 @@ jobs:
               if i.get('posted') or i.get('error'): continue
               due = datetime.fromisoformat(i['at'].replace('Z', '+00:00'))
               if due <= now: n += 1
-          print(min(n, 3))
-          ")
-          echo "items due now (cap 3/run): $DUE"
-          if [ "$DUE" -eq 0 ]; then
-            echo "nothing due this tick -> no-op"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          python3 ig_scheduler.py run --max 3 || true
-          echo "changed=true" >> "$GITHUB_OUTPUT"
+          print(min(n, 5))
+          " 2>/dev/null || echo 0)
+            echo "tick $(date -u +%H:%M:%S): items due now (cap 5/tick): $DUE"
+            if [ "$DUE" -gt 0 ]; then
+              python3 ig_scheduler.py run --max 5 && CHANGED=true || true
+              git add instagram/schedule_queue.json
+              if ! git diff --cached --quiet; then
+                git commit -m "ig queue state update [skip ci]"
+                git push origin main || { git pull --rebase origin main; git push origin main; }
+              fi
+            fi
+            sleep 120
+          done
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
 
       - name: Commit queue state back (prevents double-posts)
         if: steps.run.outputs.changed == 'true'

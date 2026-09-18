@@ -14,7 +14,7 @@ name: bsky-scheduler
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 minutes (cron is UTC; ET = UTC-4)
+    - cron: "0 * * * *"      # hourly: each run loops ~58min internally (dense)
   workflow_dispatch: {}      # manual run button, for tests
 
 permissions:
@@ -27,7 +27,7 @@ concurrency:
 jobs:
   post-due:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,17 +58,21 @@ jobs:
             echo "queue file missing -> no-op run"
           fi
 
-      - name: Post due items
+      - name: Post due items (58-min dense loop)
         working-directory: x-bluesky
         env:
           BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
           BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
         run: |
-          if [ ! -f bsky_scheduled_posts.json ]; then
-            echo "no queue file -> no-op"
-            exit 0
-          fi
-          DUE=$(python3 -c "
+          # GitHub scheduled runs can lag by hours; this loop posts on a
+          # 1-minute internal tick for ~58 minutes, independent of cron.
+          # State is committed back after EVERY posting tick so a mid-run
+          # crash can never cause double-posts.
+          git config user.name "apeai-bot"
+          git config user.email "actions@users.noreply.github.com"
+          END=$(( $(date +%s) + 3480 ))
+          while [ $(date +%s) -lt $END ]; do
+            DUE=$(python3 -c "
           import json, time
           q = json.load(open('bsky_scheduled_posts.json'))
           now = time.time()
@@ -76,12 +80,17 @@ jobs:
                     and time.mktime(time.strptime(i['at'].replace('Z', '+0000'), '%Y-%m-%dT%H:%M:%S%z')) <= now + 60)
           print(due)
           " 2>/dev/null || echo 0)
-          echo "items due now: $DUE"
-          if [ "$DUE" -gt 0 ]; then
-            node src/scheduler.js --max-wait 60
-          else
-            echo "nothing due this tick -> no-op (no login)"
-          fi
+            echo "tick $(date -u +%H:%M:%S): items due now: $DUE"
+            if [ "$DUE" -gt 0 ]; then
+              node src/scheduler.js --max-wait 60 || true
+              git add x-bluesky/bsky_scheduled_posts.json
+              if ! git diff --cached --quiet; then
+                git commit -m "bsky queue state update [skip ci]"
+                git push origin main || { git pull --rebase origin main; git push origin main; }
+              fi
+            fi
+            sleep 60
+          done
 
       - name: Commit queue state back (prevents double-posts)
         run: |
