@@ -1,5 +1,17 @@
 # Ape AI — Social Media Machine Status (2026-09-18)
 
+## THREADS IS LIVE (Sep 18 evening)
+- Account: blitztheape on Threads, connected via Postiz (id cmu7hxfr0001jlb0yqnr49j2v,
+  pinned in postiz/threads_schedule.py). Boss accounts remain off-limits.
+- Bridge: postiz/threads_schedule.py (schema|test|all|now). Threads limits: 500
+  chars, 250 posts/24h (own bucket, separate from IG ~50/day and from X/BSKY).
+- TAG RULE (Threads only): ONE topic tag per post (Meta API takes the first valid
+  tag as the topic). Rotation: 24x #AskApe (our own new topic) + discovery tags
+  #Investing #AI #Stocks #Trading. Never stack multiple tags.
+- Loaded: 40 posts = 1 now (Sep 18) + 9 more today 17:30-19:30 ET + 20 on Sep 19
+  (9:00-13:45) + 10 on Sep 20 (9:00-11:15). All deduped vs every other platform
+  (base text without tag line is the dedupe key).
+
 ## Sep 18 evening fixes (X + Bluesky only; IG out of scope)
 - **Dense loop runners shipped.** GitHub scheduled runs were firing hours late
   (cron unreliable). Both bsky + ig workflows now run a ~58-min internal loop
