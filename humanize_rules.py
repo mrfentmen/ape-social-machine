@@ -37,6 +37,22 @@ ALLOW = {
     "solana", "xrp", "doge", "gpus", "datacenter", "datacenters",
     "hyperscaler", "hyperscalers", "nebius", "coreweave", "robinhood",
     "webull", "sept", "qube", "meme", "memes", "spacex", "megacap", "megacaps",
+    # URL scheme (IG captions carry http://AskApe.com; "com" above covers the host)
+    "http", "https",
+    # AI / research vocabulary used in the IG caption bank (2026-09-18)
+    "nyse", "copilot", "copilots", "watchlist", "watchlists",
+    "repricing", "repricings", "screener", "screeners", "timeframe",
+    # Instagram SEO hashtag tokens (rotate 3 per caption; #AskApe + #AskApeAI lead)
+    "aiinvesting", "aifinance", "aistockresearch", "aiinvestingtools",
+    "aitrading", "stockmarket", "stockmarketnews", "stockmarketeducation",
+    "stockmarketforbeginners", "stockanalysis", "stocktrading",
+    "investingforbeginners", "investingbasics", "investingtips",
+    "learntoinvest", "financialeducation", "financialliteracy",
+    "financialfreedom", "retailinvestor", "marketnews", "marketroutine",
+    "daytrading", "swingtrading", "tradingeducation", "tradingpsychology",
+    "riskmanagement", "portfoliomanagement", "indexfunds", "passiveincome",
+    "moneytips", "moneymindset", "wealthbuilding", "chartpatterns",
+    "wallstreet", "axelblitzbeaumont", "researchhabits",
 }
 
 # ---------------------------------------------------------------- dictionary
@@ -68,7 +84,7 @@ COMMON = {
     "monetizing", "survived", "sourced", "replacing", "skipped", "optimized",
     "gatekeeping", "rebalances", "readiness", "unsafe", "recurring",
     "resilient", "attention", "rotation", "offering", "sophisticated",
-    "tv", "info", "google", "googled", "youtube", "espresso",
+    "tv", "info", "google", "googled", "youtube", "espresso", "online",
 }
 
 

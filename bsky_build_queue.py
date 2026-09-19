@@ -22,15 +22,27 @@ Usage:
 
 import json
 import os
+import glob
 import random
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LOCAL_TZ = datetime.now().astimezone().tzinfo
 
-DRAFT_FILES = ["drafts_bulk.json", "drafts_bulk2.json", "drafts_bulk3.json",
-               "drafts_bulk4.json", "drafts_bulk5.json"]  # tagged Blitz voice
+def _draft_sort_key(name):
+    """drafts_bulk.json, drafts_bulk2.json ... drafts_bulk11.json in order."""
+    m = re.search(r"drafts_bulk(\d*)\.json$", name)
+    return int(m.group(1)) if m and m.group(1) else 1
+
+
+# Every bulk draft file, so new batches are picked up automatically. The old
+# hardcoded list stopped at batch 5, which hid batches 6 to 11 from the builder.
+DRAFT_FILES = sorted(
+    (os.path.basename(p) for p in glob.glob(os.path.join(HERE, "drafts_bulk*.json"))),
+    key=_draft_sort_key,
+)  # Blitz voice, tagged
 STAGING = os.path.join(HERE, "bsky_queue_staging.json")
 LIVE = os.path.join(HERE, "x-bluesky", "bsky_scheduled_posts.json")
 SENT_LOG = os.path.join(HERE, "x-bluesky", "bsky_posts_sent.txt")
@@ -69,7 +81,9 @@ def load_draft_pool():
         with open(path) as f:
             data = json.load(f)
         for p in data.get("bluesky", []):
-            if p.get("voice") != "blitz":
+            # Batches 7 and later carry no voice field, they are Blitz voice by
+            # construction. Only reject a draft when it names a different voice.
+            if p.get("voice") not in (None, "blitz"):
                 continue
             if len(p["text"]) > 300:
                 continue

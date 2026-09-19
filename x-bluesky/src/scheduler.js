@@ -14,14 +14,21 @@
 //   Each item:
 //     {
 //       at: "2026-07-14T14:30:00Z",     // ISO UTC timestamp
-//       text: "post body...",             // ≤300 chars
+//       text: "post body...",             // ≤300 chars (1024 for video posts)
 //       kind: "root" | "reply",
 //       target_uri?: "at://...",          // required for kind === "reply"
+//       video_url?: "https://...mp4",     // optional: attach a video
+//       aspect?: { width, height },       // required with video_url
+//       alt?: "...",                      // optional video description
 //       posted: false,
 //       posted_at?: null,
 //       uri?: null,
 //       error?: null
 //     }
+//
+// Video posts upload the file to the PDS with uploadBlob and embed it as
+// app.bsky.embed.video. Bluesky allows one video per post; the file has to be
+// mp4 and within the video service limits (10 minutes, 300MB as of Aug 2026).
 //
 // Posts marked posted: true are skipped on subsequent runs. Already-
 // overdue posts at boot fire immediately. Failed posts set error and
@@ -76,8 +83,31 @@ function logPosted(text, kind, targetUri, resultUri) {
 
 // -- Posting helpers ---------------------------------------------------------
 
+async function buildVideoEmbed(agent, item) {
+  const res = await fetch(item.video_url);
+  if (!res.ok) {
+    throw new Error(`could not fetch video (${res.status}) from ${item.video_url}`);
+  }
+  const bytes = new Uint8Array(await res.arrayBuffer());
+  if (bytes.length === 0) {
+    throw new Error(`video at ${item.video_url} was empty`);
+  }
+  const uploaded = await agent.uploadBlob(bytes, { encoding: "video/mp4" });
+  const embed = {
+    $type: "app.bsky.embed.video",
+    video: uploaded.data.blob,
+    aspectRatio: item.aspect || { width: 1080, height: 1920 },
+  };
+  if (item.alt) embed.alt = item.alt;
+  return embed;
+}
+
 async function postRoot(agent, item) {
-  const r = await agent.post({ text: item.text });
+  const params = { text: item.text };
+  if (item.video_url) {
+    params.embed = await buildVideoEmbed(agent, item);
+  }
+  const r = await agent.post(params);
   item.uri = r.uri;
   item.posted_at = new Date().toISOString();
   logPosted(item.text, "root", null, r.uri);

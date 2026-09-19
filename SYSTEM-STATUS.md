@@ -1,14 +1,14 @@
-# Ape AI — Social Media Machine Status (2026-09-18)
+# Ape AI — Social Media Machine Status (2026-09-19)
 
 ## PLATFORM LIMITS + OUR CADENCE (locked Sep 18 evening)
 Rule: posts are ALWAYS spaced 15+ min apart inside any day. Never burst.
 
 | Platform | Hard cap (24h) | Our cadence | Notes |
 |---|---|---|---|
-| Threads | 250 API posts | 60/day (LIVE: 640 scheduled Sep 18-30) | 500 char max (sweet spot 200-450); ONE topic tag per post; if body mentions AskApe, tag = #AskApe, else rotate #Investing/#AI/#Stocks/#Trading |
-| Instagram | 100/day standalone API (boss's Meta Business Suite key); Postiz path also available | 100/day ACTIVE Sep 19-24: 10:00am-9:57pm ET, 7m15s spacing (600 slots armed; old 20/day retired; tonight stays quiet for the rate-limit reset) | reels via cloud; Sep 18 block was Meta rate-limit, resets midnight |
-| Bluesky | ~1,666 posts/day (3 pts/post, 5k pts/h, 35k/day); 300 logins/day | 60/day (LIVE: 736 queued Sep 18-30) | no real ceiling; loop runner logs in ~1x/hour, fine |
-| X (via Postiz) | no public per-account cap (old platform cap 2,400/day) | 60/day (LIVE: 660 scheduled Sep 18-30) | Postiz publishes on its own clock |
+| Threads | 250 API posts | 60/day text (LIVE Sep 18-Oct 1) + **5 videos/day** Sep 19-28 | 500 char max (sweet spot 200-450); ONE topic tag per post; if body mentions AskApe, tag = #AskApe, else rotate #Investing/#AI/#Stocks/#Trading |
+| Instagram | 100/day standalone API (boss's Meta Business Suite key); Postiz path also available | 100/day ACTIVE Sep 19-24: 10:00am-9:57pm ET, 7m15s spacing (600 slots armed; old 20/day retired) | reels via cloud; **Instagram now connected in Postiz** (Axel Beaumont, instagram-standalone, id cmu7hxzef04wzmo0ytstnzc6n) so Postiz can drive it too; Sep 18 block was Meta rate-limit |
+| Bluesky | ~1,666 posts/day (3 pts/post, 5k pts/h, 35k/day); 300 logins/day | 60/day text (LIVE: 736 queued Sep 18-30) + **5 videos/day** Sep 19-28 | no real ceiling; loop runner logs in ~1x/hour, fine; video needs a verified email and 1 video per post |
+| X (via Postiz) | no public per-account cap (old platform cap 2,400/day) | 60/day text (LIVE: 2,580 scheduled Sep 19-Oct 31) + **5 videos/day** Sep 19-28 | Postiz publishes on its own clock; X takes max 1 video per post |
 | YouTube | ~6-10 uploads/day (API quota) | 3/day native scheduler | Codex owns video uploads |
 | LinkedIn | no official cap; sane = 25/day max | 0 (200 drafts waiting) | boss's own posting method; drafts ready |
 
@@ -16,13 +16,107 @@ Char limits: X 280 - Bluesky 300 - Threads 500 - LinkedIn 3,000.
 Cadence bumped 40 to 60/day on Threads/Bluesky/X on Sep 18 (evening block
 19:00-23:45 added on top of the 9:00-18:45 grid = 60 slots at 15-min spacing).
 Expansion is SHIPPED: Threads 640 + X 660 + BSKY 736 scheduled Sep 18-30.
-Global dedupe note: all platforms draw from one shared pool; 831 unused
-sheet-voice drafts remain - generate batch 11 within ~2 days.
+Global dedupe note: all platforms draw from one shared pool. Batch 11 SHIPPED
+2026-09-18 night: 2600 new drafts (1000 X + 1000 Bluesky + 600 LinkedIn).
 IG 100/day ACTIVATED (boss idea Sep 18, armed same night): 100 slots/day ET
 10:00am-9:57:45pm at 7m15s spacing (10-min spacing only fits 72 in 12h).
 Sep 19-24 covered (600 slots). Videos round-robined across all 83 Drive
-files, never twice within a day. Captions rotate 0,1,2 per the bank note.
+files, never twice within a day. **Every post gets its own caption** (see below).
 To extend Sep 25+: rerun the queue-builder with --posts 100 before Sep 23.
+
+## IG CAPTIONS: 2,870 CAPTION BANK, ONE TIME USE (2026-09-19)
+- `instagram/caption_bank.json` now holds **2,870 captions**: 20 curated (hand written)
+  + 2,850 generated. Every one is 200-300 words (actual 200-276, average 212), carries
+  **exactly 5 hashtags** (`#AskApe` + `#AskApeAI` + 3 rotating discovery tags), 2,680
+  distinct tag sets, max 1,647 chars (IG's limit is 2,200). Zero validation problems.
+- **Captions are one time use.** `build_day_queue.py` hands each post a caption nothing
+  else has used, and only recycles the oldest once all 2,870 have been spent. Captions
+  already live on posted posts stay out of rotation while the bank lasts.
+- **720 of 720 pending posts now have a unique caption** (was 620 captions over 720
+  posts, max repeat 2). 720 distinct discovery tag triples, so the hashtags rotate fully.
+  The 5 posted items keep their old captions (historical record) and are not reused.
+- Generator: `python3 generate_ig_captions.py --count 3000` (pools in `ig_pools.py`,
+  batch 2 lines in `ig_pools_2.py`, 8 themes so paragraphs stay on topic).
+  Options: `--dry-run`, `--seed`, `--no-curated`, `--count N`. Preview: `caption_bank_preview.md`.
+- Capacity: 3,360 hook/context/insight combinations, 2,850 captions accepted. To go past
+  this, add lines to `ig_pools_2.py` (or a batch 3 file) rather than raising --count.
+- Brand rules enforced on every caption: dash free, American spelling, no banned phrases,
+  no invented figures, `humanize_rules.validate_human` clean.
+- `build_day_queue.py` validates the bank before scheduling (`check_bank`), can re-text a
+  live queue (`--recaption [--dry-run]`, posted items never touched), and no longer crashes
+  when Drive holds fewer videos than `--posts`.
+- TO GO LIVE: the cloud posts from the repo queue, so this takes effect after
+  `instagram/caption_bank.json` + `instagram/schedule_queue.json` plus the scripts
+  (`build_day_queue.py`, `ig_pools.py`, `ig_pools_2.py`, `generate_ig_captions.py`,
+  `humanize_rules.py`) are committed and pushed to `ape-social-machine`.
+  **Not pushed yet.**
+- Repetition math: 2,870 captions = 28 days at 100 posts/day before any caption returns.
+
+## DRAFT POOLS RESTOCKED: BATCH 11 (2026-09-18 night)
+- `drafts_bulk11.json`: **1000 X + 1000 Bluesky + 600 LinkedIn = 2600 new drafts**
+  (`generate_bulk_drafts11.py`, new pools in `blitz_pools_11.py` and
+  `skill_li_pools_11.py`). Preview: `drafts_bulk11_preview.md`. Drafts only, nothing
+  scheduled or posted.
+- Why that size: once the Sep 19-30 Postiz X loads and the Threads batches went in,
+  only about 550 unused X texts were left, roughly four days at 60/day X plus
+  60/day Threads.
+- Dedupe: **0 collisions**. Every body is unique inside the batch, X and Bluesky
+  bodies do not overlap, and nothing collides with the 14,389 texts already on disk
+  (all platforms, queues and staging). The post body without its tag line is the key.
+- Every post: humanize clean, dash free, no banned phrases, no invented figures,
+  `#AskApe` first, 5 tags on every X, Bluesky and LinkedIn draft.
+- FREE POOL NOW: X + Threads ~1,414 texts (~11.8 days at 120/day), Bluesky ~1,420
+  (~23.7 days at 60/day), LinkedIn 1,338 drafts waiting (~53 days at the 25/day cap).
+- BUILDER FIX: `bsky_build_queue.py` had a hardcoded `DRAFT_FILES` list that stopped
+  at batch 5, so batches 6 to 11 were invisible, and its `voice == "blitz"` filter
+  rejected every draft after batch 5 (only batch 5 carries that field). It now globs
+  every `drafts_bulk*.json` and accepts a missing voice field. The visible pool went
+  from about 440 to **2,540 drafts (63.5 days)** at 40 posts/day. The live queue was
+  not touched (736 items, 733 pending, no staging file written).
+
+## X: OCTOBER FILLED, SCHEDULED IN POSTIZ (2026-09-19)
+- **1,860 X posts scheduled for Oct 1-31** (60/day, 09:00-23:45 ET, every 15 min),
+  on top of the 720 already armed for Sep 19-30. Verified live: Postiz reports
+  **31/31 October days at 60 posts**, 2,580 queued + 17 published.
+- Content: unique unused X drafts from `drafts_bulk*.json` (2,078 free before this,
+  218 left after). Zero repeats inside October; every post passed
+  `humanize_rules` and the 280 char X limit (actual 95-278 chars).
+- New tool: `postiz/build_x_batch.py` (the X batch builder that never existed).
+  `python3 build_x_batch.py --start 2026-10-01 --days 31 [--dry-run]` stages the plan;
+  `schedule_x_batch.py all --file x_batch_october_staging.json --chunk 60` pushes it.
+  It refuses to write if the pool is short, a draft breaks brand rules, or texts repeat.
+- Staging plan kept at `postiz/x_batch_october_staging.json` (source per post).
+- **WATCH:** the shared X/Threads draft pool is nearly spent. Only 218 free texts
+  remain, and Threads is armed only to Oct 1 (16 posts on that date, nothing after).
+  Both X and Threads need a batch 12 before the pool refills can cover October.
+
+## VIDEO POSTS: 5 A DAY ON X, THREADS, BLUESKY (2026-09-19)
+- **5 videos a day on all three platforms**, at **07:45, 08:00, 08:15, 08:30, 08:45 ET**.
+  That early block is the only window free of the 15 minute text cadence (09:00-23:45),
+  so nothing already armed moved and no two posts share a minute.
+- **54 Blitz videos** (local `~/Desktop/Blitz videos`, 1080x1920, 33 to 65s, 1.4 to 3.9 MB),
+  each used once. Sep 19-28 at 5/day, Sep 29 at 4. Armed:
+  X **54**, Threads **54**, Bluesky **54** (same video on all three the same day).
+- **Captions are unique per platform.** X and Threads draw from the X draft pool, Bluesky
+  from the Bluesky draft pool. Zero overlap between the three plans and zero collision
+  with anything already live.
+- Videos are NOT on Google Drive. `postiz/upload_local_media.py` uploads local files
+  straight into the Postiz media library: it asks for a widget session and ticket, then
+  POSTs each file to `https://api.postiz.com/media-widget/upload?ticket=...` (the same
+  endpoint the Postiz upload widget uses) and polls for `ready`. Manifest:
+  `postiz/media_library.json` (filename to id, path, bytes). Re-run with `--limit N` or
+  `--dry-run`; already-uploaded files are skipped.
+- Schedulers: `postiz/schedule_video_batch.py build|show|test|all --platform x|threads`
+  (Postiz, attachments are URL strings) and `bsky_build_video_queue.py [--show|--arm]`.
+- **Bluesky scheduler gained video support.** `x-bluesky/src/scheduler.js` `postRoot`
+  now uploads the file with `uploadBlob` and embeds `app.bsky.embed.video` with
+  aspectRatio plus alt. Verified end to end: posted a video, read the record back
+  (embed confirmed), then deleted it. Bluesky allows 10 minute / 300 MB videos now.
+- **TO GO LIVE:** the Bluesky half is armed in the repo queue and publishes from the
+  cloud once pushed. X and Threads video posts are already inside Postiz and publish
+  on Postiz's clock. **No push done yet.**
+- WATCH: 54 videos is 11 days at 5/day. The boss is adding another 54 to the same
+  folder; re-run the uploader then rebuild to extend.
 
 ## THREADS IS LIVE (Sep 18 evening)
 - Account: blitztheape on Threads, connected via Postiz (id cmu7hxfr0001jlb0yqnr49j2v,
@@ -46,18 +140,24 @@ To extend Sep 25+: rerun the queue-builder with --posts 100 before Sep 23.
   pushes 3x with rebase until remote has all state.
 - **Queue coverage:** Bluesky armed through Sep 30 (496 total), X scheduled
   through Sep 30 via Postiz (Sep 25-30 batch of 240 all accepted, Axel only).
-- **Postiz login:** expires ~10h. Renew via `postiz_mcp.py login --wait 170`
+- **Postiz login:** the access token is good for **1 hour** only (verified Sep 19:
+  issued 00:03, expires_at 01:03). Renew via `postiz_mcp.py login --wait 170`
   or paste the 127.0.0.1:8765/callback URL to `paste --url` (rescue mode).
+  Anything already inside Postiz keeps publishing on Postiz's clock; an expired
+  token only blocks reading and adding more.
 
 ## Sep 18 missed-day incident (RESOLVED)
 Nothing was ever scheduled for Sep 18 (queues started Sep 19). Fill applied:
 16 posts 4-8pm ET on Bluesky (armed in repo queue, fired live, verified) and
 16 on X (Postiz, Axel only, all postIds back). Cause: day-gap in batch 1
 planning. Rule: every load-up must include TODAY if any posting window remains.
-Postiz login expires ~10h; use postiz_mcp.py login --wait 170, or paste the
+Postiz login expires in 1h; use postiz_mcp.py login --wait 170, or paste the
 127.0.0.1:8765/callback URL to `paste --url` (rescue mode, no listener needed).
 
 ## LIVE-STATE SNAPSHOT (2026-09-18, session 3)
+> NOTE: the X and Instagram numbers in this snapshot are superseded. Current
+> state is in the X and IG CAPTIONS sections at the top of this file
+> (Sep 19: X armed through Oct 31, IG bank 2,870 one time use captions).
 
 - **Hashtags: DONE.** All 1,085 X + Bluesky drafts carry `#AskApe` first + up to 2
   discovery tags (`blitz_pools.pick_tags`, patcher `add_hashtags.py`). Verified:
