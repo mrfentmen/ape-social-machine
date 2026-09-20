@@ -1,13 +1,12 @@
 name: ig-scheduler
 
-# Cloud Instagram poster. Fires every 15 minutes; posts whatever is due in
-# instagram/schedule_queue.json (which is COMMITTED and pushed back after
-# every run, so nothing double-posts).
+# Cloud Instagram poster. Cron fires hourly and each run loops internally
+# on a 2-minute tick for ~58 minutes (see "58-min dense loop" below), posting
+# whatever is due in instagram/schedule_queue.json (which is COMMITTED and
+# pushed back after every run, so nothing double-posts).
 #
 # CUTOVER RULE: the local launchd job com.apeai.igscheduler on the Mac and
-# this workflow must NEVER both be live. One owner at a time. The schedule
-# trigger below is added only at cutover; until then this workflow is
-# manual-only (workflow_dispatch) and inert.
+# this workflow must NEVER both be live. One owner at a time.
 #
 # Videos are NOT in the repo. The queue references Google Drive files via
 # instagram/drive_urls.json (public direct links); Instagram's servers fetch
@@ -87,7 +86,14 @@ jobs:
             echo "tick $(date -u +%H:%M:%S): items due now (cap 5/tick): $DUE"
             if [ "$DUE" -gt 0 ]; then
               python3 ig_scheduler.py run --max 5 && CHANGED=true || true
-              git add instagram/schedule_queue.json
+              # -C "$GITHUB_WORKSPACE" keeps the pathspec repo-root-relative.
+              # This step's working-directory is instagram, so a bare
+              # "instagram/..." pathspec resolved to instagram/instagram/...
+              # and exited 128, discarding the posted flags for the whole tick.
+              # || true: a staging failure must never kill the tick loop, or
+              # the run dies before its commit step and the posted flags are
+              # lost, which re-fires the same items on every run.
+              git -C "$GITHUB_WORKSPACE" add instagram/schedule_queue.json || true
               if ! git diff --cached --quiet; then
                 git commit -m "ig queue state update [skip ci]" || true
               fi
@@ -107,11 +113,14 @@ jobs:
           echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
 
       - name: Commit queue state back (prevents double-posts)
-        if: steps.run.outputs.changed == 'true'
+        # always(): state must be saved even if the posting step died, since
+        # a skipped commit is what makes the next run re-post the same items.
+        # The step itself no-ops when nothing is staged.
+        if: always()
         run: |
           git config user.name "apeai-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add instagram/schedule_queue.json
+          git add instagram/schedule_queue.json || true
           if git diff --cached --quiet; then
             echo "no queue changes -> nothing to commit"
           else

@@ -1,8 +1,11 @@
 name: bsky-scheduler
 
-# Cloud Bluesky poster. Fires every 15 minutes; the scheduler posts only
-# items whose due time is now or within 60s (--max-wait 60) and exits.
-# Outside the 09:00-18:45 ET window nothing is due -> no-op run.
+# Cloud Bluesky poster. Cron fires hourly; each run loops internally on a
+# 1-minute tick for ~58 minutes (see "58-min dense loop" below), so the
+# effective cadence is not tied to how late GitHub starts the job. The
+# scheduler posts only items whose due time is now or within 60s
+# (--max-wait 60) and exits. Outside the 09:00-18:45 ET window nothing is
+# due -> no-op run.
 #
 # STATE: the queue file (x-bluesky/bsky_scheduled_posts.json) IS tracked in
 # git. After any change (posted flags, failures) the job commits it back to
@@ -83,7 +86,14 @@ jobs:
             echo "tick $(date -u +%H:%M:%S): items due now: $DUE"
             if [ "$DUE" -gt 0 ]; then
               node src/scheduler.js --max-wait 60 || true
-              git add x-bluesky/bsky_scheduled_posts.json
+              # -C "$GITHUB_WORKSPACE" keeps the pathspec repo-root-relative.
+              # This step's working-directory is x-bluesky, so a bare
+              # "x-bluesky/..." pathspec resolved to x-bluesky/x-bluesky/...
+              # and exited 128, discarding the posted flags for the whole tick.
+              # || true: a staging failure must never kill the tick loop, or
+              # the run dies before its commit step and the posted flags are
+              # lost, which re-fires the same items on every run.
+              git -C "$GITHUB_WORKSPACE" add x-bluesky/bsky_scheduled_posts.json || true
               if ! git diff --cached --quiet; then
                 git commit -m "bsky queue state update [skip ci]" || true
               fi
@@ -102,10 +112,13 @@ jobs:
           done
 
       - name: Commit queue state back (prevents double-posts)
+        # always(): state must be saved even if the posting step died, since
+        # a skipped commit is what makes the next run re-post the same items.
+        if: always()
         run: |
           git config user.name "apeai-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add x-bluesky/bsky_scheduled_posts.json
+          git add x-bluesky/bsky_scheduled_posts.json || true
           if git diff --cached --quiet; then
             echo "no queue changes -> nothing to commit"
           else
