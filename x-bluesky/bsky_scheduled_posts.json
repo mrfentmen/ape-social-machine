@@ -4980,9 +4980,11 @@
     "text": "The loud take lost money quietly. I took notes.\n\nA one time charge shows up every year at some companies. Recurring. Odd how that works.\n\n#Trading #Finance #Stocks #Money #NYC",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mvzotjkhe72w",
+    "posted_at": "2026-09-21T12:15:00.264Z"
   },
   {
     "at": "2026-09-21T12:30:00Z",
