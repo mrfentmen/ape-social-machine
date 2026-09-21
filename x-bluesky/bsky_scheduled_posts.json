@@ -4991,9 +4991,11 @@
     "text": "The distance between a question about a stock and a plain English answer used to be a finance degree.\n\nThe best research habit is cheap: write down what would prove you wrong. Then go look.\n\n#Trading #Stocks #AskApe #Money #Finance",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mvzpodxvx22k",
+    "posted_at": "2026-09-21T12:30:00.384Z"
   },
   {
     "at": "2026-09-21T12:45:00Z",
