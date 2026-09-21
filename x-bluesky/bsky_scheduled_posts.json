@@ -4958,9 +4958,11 @@
     "text": "I read the tape like street signs.\n\nProfit targets aren't dreams. They're orders waiting to happen.\n\nProfit targets aren't dreams. They're orders waiting to happen.\n\n#Trading #Money #Stocks #NYC #AskApe",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mvzn5v23dd2w",
+    "posted_at": "2026-09-21T11:45:00.380Z"
   },
   {
     "at": "2026-09-21T12:00:00Z",
