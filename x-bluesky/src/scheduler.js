@@ -10,6 +10,17 @@
 //   node src/scheduler.js list               (show queue status)
 //   node src/scheduler.js clear              (wipe queue)
 //
+// Rate limiting (see rate_governor.js for why these exist):
+//   --min-gap SEC    floor between two posts on the account, measured against
+//                    the newest posted_at in the queue so it holds across the
+//                    cloud workflow's once-a-minute re-invocation.
+//                    Default 900 (the intended 15 minute cadence). 0 disables.
+//   --max-posts N    most queue items this one invocation may handle.
+//                    Default 6. 0 means no limit.
+//   --max-age-min M  drop a post that is more than M minutes late instead of
+//                    firing it late. Default 0 (disabled) so removing content is
+//                    always an explicit choice.
+//
 // Queue file: bsky_scheduled_posts.json
 //   Each item:
 //     {
@@ -38,11 +49,26 @@
 import dotenv from "dotenv";
 import { AtpAgent } from "@atproto/api";
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from "fs";
+import { governorVerdict, staleness } from "./rate_governor.js";
 
 dotenv.config();
 
 const QUEUE_FILE = "bsky_scheduled_posts.json";
 const POSTS_LOG = "bsky_posts_sent.txt";
+
+// The account's intended cadence. A run posts nothing when the newest
+// posted_at is closer than this, which is what stops a delayed cloud run from
+// firing the whole backlog. See rate_governor.js.
+const DEFAULT_MIN_GAP_SEC = 900;
+const DEFAULT_MAX_POSTS = 6;
+
+/** A non-negative numeric CLI flag, or the fallback when absent/invalid. */
+function numFlag(argv, name, fallback) {
+  const idx = argv.indexOf(name);
+  if (idx === -1) return fallback;
+  const value = Number(argv[idx + 1]);
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
 
 async function getAgent() {
   const handle = process.env.BSKY_HANDLE;
@@ -207,6 +233,8 @@ function cmdList() {
   for (const [i, item] of queue.entries()) {
     const status = item.posted
       ? `✓ posted ${item.posted_at} → ${item.uri}`
+      : item.skipped
+      ? `🗑 skipped: ${item.error}`
       : item.error
       ? `✗ error: ${item.error}`
       : `⏳ due ${new Date(item.at).toISOString()}`;
@@ -220,8 +248,21 @@ function cmdClear() {
   console.log("Queue cleared.");
 }
 
-async function cmdRun(dryRun, checkBetween, maxWaitSec = 0) {
-  let queue = loadQueue().filter((i) => i && !i.posted);
+// Persist one item's new state back into the queue on disk. Matches on
+// `at` + `text`, which is the queue's identity, and skips null rows so a
+// malformed entry cannot crash the run.
+function persistItem(item) {
+  saveQueue(loadQueue().map((existing) => {
+    if (!existing) return existing;
+    const matches = existing.at === item.at && existing.text === item.text;
+    return matches ? item : existing;
+  }));
+}
+
+async function cmdRun(dryRun, checkBetween, maxWaitSec = 0, opts = {}) {
+  const { minGapSec = 0, maxPosts = 0, maxAgeSec = 0 } = opts;
+  const all = loadQueue();
+  let queue = all.filter((i) => i && !i.posted && !i.skipped);
   if (queue.length === 0) {
     console.log("Nothing to do — queue is empty or all posts marked posted.");
     return;
@@ -230,26 +271,89 @@ async function cmdRun(dryRun, checkBetween, maxWaitSec = 0) {
 
   if (dryRun) {
     console.log("🔍 Dry run — no posts will be made.");
+    const gate = governorVerdict(all, { now: Date.now(), minGapSec });
+    if (!gate.allowed) {
+      console.log(
+        `🛑 Rate governor would BLOCK this run: last post was ${Math.round(gate.sinceSec)}s ago, ` +
+          `--min-gap is ${minGapSec}s (${Math.round(gate.waitSec)}s left).`
+      );
+    }
     for (const item of queue) {
       const delay = Date.parse(item.at) - Date.now();
+      const late = staleness(item, { now: Date.now(), maxAgeSec });
       const when =
         delay <= 0
           ? `OVERDUE by ${Math.round(-delay / 1000)}s — would fire NOW`
           : `in ${Math.round(delay / 1000)}s (${new Date(item.at).toISOString()})`;
-      console.log(`[${item.kind}] ${when}: "${item.text.slice(0, 80)}…"`);
+      const staleMark = late.stale
+        ? ` [TOO STALE by ${Math.round(late.lateSec / 60)} min, --max-age-min ${Math.round(maxAgeSec / 60)}, would be DROPPED]`
+        : "";
+      console.log(`[${item.kind}] ${when}${staleMark}: "${item.text.slice(0, 80)}…"`);
     }
     return;
   }
 
-  const agent = await getAgent();
-  for (const [i, item] of queue.entries()) {
+  // Rate governor, read out of the queue itself so the limit holds across the
+  // workflow's once-a-minute re-invocation rather than only inside this process.
+  const gate = governorVerdict(all, { now: Date.now(), minGapSec });
+  if (!gate.allowed) {
+    console.log(
+      `🛑 Rate governor: last post was ${Math.round(gate.sinceSec)}s ago and --min-gap is ` +
+        `${minGapSec}s — ${Math.round(gate.waitSec)}s left. Posting nothing this run. ` +
+        `${queue.length} item(s) still pending.`
+    );
+    return;
+  }
+
+  // Sweep the stale items before authenticating. Dropping a post that is hours
+  // late is housekeeping: it needs no credentials, and a backlog that is
+  // entirely stale must still get cleaned up when auth is broken.
+  let dropped = 0;
+  let notDue = 0;
+  const due = [];
+  for (const item of queue) {
     const delay = Date.parse(item.at) - Date.now();
     if (delay > maxWaitSec * 1000) {
-      console.log(
-        `⏭️ Skipping ${item.kind} due ${item.at} — too far out (max wait ${maxWaitSec}s): "${item.text.slice(0, 60)}…"`
-      );
+      notDue++;
       continue;
     }
+    const late = staleness(item, { now: Date.now(), maxAgeSec });
+    if (late.stale) {
+      dropped++;
+      item.skipped = true;
+      item.error =
+        `skipped: ${Math.round(late.lateSec / 60)} min late, --max-age-min is ${Math.round(maxAgeSec / 60)}`;
+      console.log(
+        `🗑️ Dropping ${item.kind} due ${item.at} — ${item.error}. A post this late reads as a bot emptying a queue.`
+      );
+      persistItem(item);
+      continue;
+    }
+    due.push(item);
+  }
+  if (notDue > 0) {
+    console.log(
+      `⏭️ ${notDue} item(s) not due yet — further out than --max-wait ${maxWaitSec}s.`
+    );
+  }
+  if (due.length === 0) {
+    console.log(`\nDone. Posted 0, dropped ${dropped} as too stale, nothing due to post.`);
+    return;
+  }
+
+  // Authenticate only when there is actually something to post.
+  const agent = await getAgent();
+  let handled = 0;
+  let posted = 0;
+  for (const item of due) {
+    if (maxPosts > 0 && handled >= maxPosts) {
+      console.log(
+        `⏸️ --max-posts ${maxPosts} reached; ${due.length - handled} due item(s) left for a later run.`
+      );
+      break;
+    }
+    handled++;
+    const delay = Date.parse(item.at) - Date.now();
     if (delay > 0) {
       console.log(
         `⏳ Sleeping ${Math.round(delay / 1000)}s until ${item.at} for ${item.kind}: "${item.text.slice(0, 60)}…"`
@@ -263,15 +367,13 @@ async function cmdRun(dryRun, checkBetween, maxWaitSec = 0) {
         await postRoot(agent, item);
       }
       item.posted = true;
-      console.log(`✅ ${i + 1}/${queue.length} posted → ${item.uri}`);
+      posted++;
+      console.log(`✅ ${handled}/${due.length} posted → ${item.uri}`);
     } catch (err) {
       item.error = err.message;
-      console.log(`❌ ${i + 1}/${queue.length} FAILED: ${err.message}`);
+      console.log(`❌ ${handled}/${due.length} FAILED: ${err.message}`);
     }
-    saveQueue(loadQueue().map((existing) => {
-      const matches = existing.at === item.at && existing.text === item.text;
-      return matches ? item : existing;
-    }));
+    persistItem(item);
 
     if (checkBetween) {
       try {
@@ -283,7 +385,9 @@ async function cmdRun(dryRun, checkBetween, maxWaitSec = 0) {
       }
     }
   }
-  console.log(`\nDone. Fired ${queue.filter((i) => i.posted).length}/${queue.length} posts from queue.`);
+  console.log(
+    `\nDone. Posted ${posted}, dropped ${dropped} as too stale, handled ${handled}/${due.length} due items.`
+  );
 }
 
 // -- Entrypoint --------------------------------------------------------------
@@ -299,7 +403,14 @@ async function main() {
   const checkBetween = argv.includes("--check-between");
   const maxWaitIdx = argv.indexOf("--max-wait");
   const maxWait = maxWaitIdx !== -1 ? Number(argv[maxWaitIdx + 1]) || 0 : 0;
-  return cmdRun(dryRun, checkBetween, maxWait);
+
+  // Safe by default: a bare `node src/scheduler.js` can no longer empty a
+  // backlog in one burst. See rate_governor.js for the measurements behind it.
+  return cmdRun(dryRun, checkBetween, maxWait, {
+    minGapSec: numFlag(argv, "--min-gap", DEFAULT_MIN_GAP_SEC),
+    maxPosts: numFlag(argv, "--max-posts", DEFAULT_MAX_POSTS),
+    maxAgeSec: numFlag(argv, "--max-age-min", 0) * 60,
+  });
 }
 
 main().catch((err) => {

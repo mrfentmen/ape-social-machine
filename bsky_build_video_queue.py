@@ -3,8 +3,8 @@
 
 Adds Blitz video posts to the Bluesky queue: five a day at 07:45, 08:00, 08:15,
 08:30 and 08:45 America/New_York. That early block sits ahead of the 15 minute
-text cadence (09:00 to 23:45) so nothing already armed is disturbed and no two
-posts ever share a minute.
+text cadence (09:00 to 18:45, the window bsky_build_queue.py builds) so nothing
+already armed is disturbed and no two posts ever share a minute.
 
 Videos come from the Postiz media manifest (public mp4 URLs), in the same order
 as the X and Threads video plans so all three platforms carry the same video on
@@ -155,17 +155,25 @@ def cmd_arm():
         plan = json.load(f)
     with open(LIVE) as f:
         live = json.load(f)
-    existing = {(i.get("at"), i.get("text")) for i in live if i}
+    # Matched on normalised text, so a rebuilt plan cannot slip a duplicate past
+    # a whitespace or newline difference. This is the check bsky_build_queue.py
+    # was missing.
+    existing = {(i.get("at"), norm(i.get("text") or "")) for i in live if i}
     added = 0
     for p in plan:
-        if (p["at"], p["text"]) in existing:
+        key = (p["at"], norm(p["text"]))
+        if key in existing:
             continue
         live.append({k: v for k, v in p.items() if k not in ("at_local", "source")})
+        existing.add(key)
         added += 1
     with open(LIVE, "w") as f:
         json.dump(live, f, indent=2)
     print(f"ARMED: {added} video post(s) copied into {LIVE} "
           f"({len(plan) - added} already present); queue now holds {len(live)}")
+    print("The CLOUD scheduler posts these (GitHub Actions, repo")
+    print("mrfentmen/ape-social-machine) - that workflow owns Bluesky, so do NOT")
+    print("also run a local scheduler or the same queue gets posted twice.")
 
 
 def main():

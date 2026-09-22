@@ -7,6 +7,16 @@ name: bsky-scheduler
 # (--max-wait 60) and exits. Outside the 09:00-18:45 ET window nothing is
 # due -> no-op run.
 #
+# RATE: --min-gap 900 is the account's 15 minute cadence, enforced by reading
+# posted_at out of the queue itself (see x-bluesky/src/rate_governor.js). A
+# per-process sleep could not work here: this loop re-invokes the script every
+# minute, so the limit has to survive across invocations. Before this, a delayed
+# run fired the whole backlog at once - measured 78 posts in 9.8 seconds.
+#
+# --max-age-min 0 keeps every late post instead of dropping it. Set it to a
+# number of minutes to discard posts that are further behind than that, which
+# stops a long cron outage from backing the queue up permanently.
+#
 # STATE: the queue file (x-bluesky/bsky_scheduled_posts.json) IS tracked in
 # git. After any change (posted flags, failures) the job commits it back to
 # main, so the next run sees fresh state and nothing double-posts. If there
@@ -50,10 +60,24 @@ jobs:
         run: |
           if [ -f x-bluesky/bsky_scheduled_posts.json ]; then
             python3 - <<'PY'
+          import datetime
           import json
-          q = json.load(open("x-bluesky/bsky_scheduled_posts.json"))
-          pending = [i for i in q if i and not i.get("posted")]
-          print(f"queue: {len(q)} total, {len(pending)} pending")
+          q = [i for i in json.load(open("x-bluesky/bsky_scheduled_posts.json")) if i]
+          pending = [i for i in q if not i.get("posted") and not i.get("skipped")]
+          posted = sum(1 for i in q if i.get("posted"))
+          dropped = sum(1 for i in q if i.get("skipped"))
+          now = datetime.datetime.now(datetime.timezone.utc)
+          overdue = sum(
+              1 for i in pending
+              if datetime.datetime.fromisoformat(i["at"].replace("Z", "+00:00")) <= now
+          )
+          print(
+              f"queue: {len(q)} total | {posted} posted | "
+              f"{len(pending)} pending ({overdue} overdue) | {dropped} dropped as stale"
+          )
+          last = max((i.get("posted_at") for i in q if i.get("posted_at")), default=None)
+          if last:
+              print(f"  last post was at {last}")
           for i in pending[:3]:
               print(f"  due {i['at']}: {i['text'][:60]}...")
           PY
@@ -75,17 +99,25 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           END=$(( $(date +%s) + 3480 ))
           while [ $(date +%s) -lt $END ]; do
+            # datetime, not time.mktime: mktime reads the timestamp as local
+            # time and silently ignores the %z offset, which is only correct on
+            # a UTC runner. Skipped rows are not due and must not re-trigger.
             DUE=$(python3 -c "
-          import json, time
+          import datetime, json
           q = json.load(open('bsky_scheduled_posts.json'))
-          now = time.time()
-          due = sum(1 for i in q if i and not i.get('posted')
-                    and time.mktime(time.strptime(i['at'].replace('Z', '+0000'), '%Y-%m-%dT%H:%M:%S%z')) <= now + 60)
+          now = datetime.datetime.now(datetime.timezone.utc)
+          horizon = now + datetime.timedelta(seconds=60)
+          due = 0
+          for i in q:
+              if not i or i.get('posted') or i.get('skipped'):
+                  continue
+              if datetime.datetime.fromisoformat(i['at'].replace('Z', '+00:00')) <= horizon:
+                  due += 1
           print(due)
           " 2>/dev/null || echo 0)
             echo "tick $(date -u +%H:%M:%S): items due now: $DUE"
             if [ "$DUE" -gt 0 ]; then
-              node src/scheduler.js --max-wait 60 || true
+              node src/scheduler.js --max-wait 60 --min-gap 900 --max-posts 6 --max-age-min 0 || true
               # -C "$GITHUB_WORKSPACE" keeps the pathspec repo-root-relative.
               # This step's working-directory is x-bluesky, so a bare
               # "x-bluesky/..." pathspec resolved to x-bluesky/x-bluesky/...

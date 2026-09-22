@@ -57,16 +57,47 @@ def norm(t):
     return " ".join(t.split()).lower()
 
 
+# Tags the sent log uses in its four field form, so a text that happens to
+# contain " | " is not mistaken for a tagged line.
+SENT_LOG_TAGS = ("root", "failed")
+
+
+def text_from_log_line(line):
+    """The post text out of one sent-log line, or None.
+
+    Two writers feed x-bluesky/bsky_posts_sent.txt with different shapes:
+      scheduler.js -> "ISO | uri | tag | text"   (tag is root or reply_to=<uri>)
+      bluesky.js   -> "ISO | uri | text"        (three fields, no tag)
+
+    The old reader required exactly four fields, so every three field line -
+    which is everything the standalone poster ever wrote - was invisible. Those
+    texts stayed in the draft pool and could be staged and published a second
+    time, which is a repost of copy already live on the account.
+    """
+    line = (line or "").rstrip("\n")
+    if not line:
+        return None
+    parts = line.split(" | ", 2)          # ISO, uri, remainder
+    if len(parts) < 3:
+        return None
+    rest = parts[2]
+    for tag in SENT_LOG_TAGS:
+        if rest.startswith(tag + " | "):
+            return rest[len(tag) + 3:]
+    if rest.startswith("reply_to=") and " | " in rest:
+        return rest.split(" | ", 1)[1]
+    return rest
+
+
 def load_sent_texts():
     """Texts already posted to Bluesky (from the sent log)."""
     sent = set()
     if os.path.exists(SENT_LOG):
         with open(SENT_LOG) as f:
             for line in f:
-                # format: ISO | uri | tag | text with newlines flattened
-                parts = line.split(" | ", 3)
-                if len(parts) == 4:
-                    sent.add(norm(parts[3]))
+                text = text_from_log_line(line)
+                if text:
+                    sent.add(norm(text))
     return sent
 
 
@@ -95,13 +126,15 @@ def load_draft_pool():
 
 def build_plan(days: int, start_offset_days: int = 1) -> list:
     pool = load_draft_pool()
-    # Don't re-stage drafts already pending in the live queue or already
-    # staged (queued or not) — dedupe across batches.
+    # Never re-stage a draft that is anywhere in the live queue, posted or not.
+    # The old condition was `not item.get("posted")`, which excluded only the
+    # PENDING queue entries and therefore put already-published copy straight
+    # back into the pool - a repost waiting to be armed.
     used_texts = set()
     if os.path.exists(LIVE):
         with open(LIVE) as f:
             for item in json.load(f):
-                if item and not item.get("posted"):
+                if item and item.get("text"):
                     used_texts.add(norm(item["text"]))
     existing_staging = []
     if os.path.exists(STAGING):
@@ -164,7 +197,15 @@ def cmd_arm():
         return
     with open(LIVE) as f:
         live = json.load(f)
+    # Match on slot + text so arming twice cannot duplicate the queue. The video
+    # builder always checked this; the text builder did not, so a rebuilt staging
+    # file re-added every slot it still shared with the live queue.
+    existing = {(i.get("at"), norm(i.get("text") or "")) for i in live if i}
+    added = 0
     for p in pending:
+        key = (p["at_utc"], norm(p["text"]))
+        if key in existing:
+            continue
         live.append({
             "at": p["at_utc"],
             "text": p["text"],
@@ -175,16 +216,20 @@ def cmd_arm():
             "uri": None,
             "error": None,
         })
+        existing.add(key)
+        added += 1
     with open(LIVE, "w") as f:
         json.dump(live, f, indent=2)
     for p in plan:
         p["queued"] = True
     with open(STAGING, "w") as f:
         json.dump(plan, f, indent=2)
-    print(f"ARMED: {len(pending)} posts copied to live scheduler queue {LIVE}")
-    print("The scheduler will post them when you run:")
-    print("  cd ~/Desktop/poster-and-scheduler/x-bluesky && node src/scheduler.js")
-    print("(Preview first with: node src/scheduler.js --dry)")
+    print(f"ARMED: {added} new post(s) copied to live scheduler queue {LIVE} "
+          f"({len(pending) - added} already present, skipped); queue holds {len(live)}")
+    print("The CLOUD scheduler posts these (GitHub Actions, repo")
+    print("mrfentmen/ape-social-machine) - that workflow owns Bluesky, so do NOT")
+    print("also run a local scheduler or the same queue gets posted twice.")
+    print("Preview locally only: cd x-bluesky && node src/scheduler.js --dry")
 
 
 def cmd_disarm():

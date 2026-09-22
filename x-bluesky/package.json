@@ -4,6 +4,7 @@
   "description": "AI-powered posting bot for X and Bluesky",
   "type": "module",
   "scripts": {
+    "test": "node --test",
     "login": "node src/login.js",
     "post": "node src/index.js",
     "post:dry": "node src/index.js --dry",

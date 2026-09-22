@@ -39,9 +39,33 @@ async function getAgent() {
 
 // -- Logging -----------------------------------------------------------------
 
-function logPost(uri, text) {
-  const line = `${new Date().toISOString()} | ${uri} | ${text.replace(/\n/g, " ")}\n`;
+// Line shape: "ISO | uri | tag | text", the same four fields scheduler.js
+// writes. The tag is not decoration: bsky_build_queue.py reads this log to keep
+// already-posted copy out of the draft pool, and a three field line was
+// invisible to it, so those texts could be staged and posted a second time.
+function logPost(uri, text, tag = "root") {
+  const line = `${new Date().toISOString()} | ${uri} | ${tag} | ${text.replace(/\n/g, " ")}\n`;
   appendFileSync(POSTS_LOG, line);
+}
+
+// The post text out of one log line, for either shape the file holds:
+//   "ISO | uri | tag | text"  (scheduler.js, and bluesky.js from now on)
+//   "ISO | uri | text"        (older lines written by bluesky.js)
+// Mirrors text_from_log_line() in bsky_build_queue.py so both readers agree.
+function textFromLogLine(line) {
+  const first = line.indexOf(" | ");
+  if (first === -1) return line;
+  const second = line.indexOf(" | ", first + 3);
+  if (second === -1) return line.slice(first + 3);
+  const rest = line.slice(second + 3);
+  for (const tag of ["root", "failed"]) {
+    if (rest.startsWith(`${tag} | `)) return rest.slice(tag.length + 3);
+  }
+  if (rest.startsWith("reply_to=")) {
+    const sep = rest.indexOf(" | ");
+    if (sep !== -1) return rest.slice(sep + 3);
+  }
+  return rest;
 }
 
 function getPastPosts() {
@@ -53,10 +77,7 @@ function getPastPosts() {
     .trim()
     .split("\n")
     .filter(Boolean);
-  return lines.map((line) => {
-    const parts = line.split(" | ");
-    return parts.length >= 3 ? parts.slice(2).join(" | ") : line;
-  });
+  return lines.map(textFromLogLine);
 }
 
 // -- Main --------------------------------------------------------------------
@@ -92,7 +113,7 @@ async function main() {
       console.log(`✅ Posted: ${result.uri || "success"}`);
     } catch (err) {
       console.error(`❌ Failed: ${err.message}`);
-      logPost("failed", finalText);
+      logPost("failed", finalText, "failed");
     }
 
     // Wait between posts
