@@ -5376,18 +5376,22 @@
     "text": "The boring layer did the heavy lifting again today.\n\nI ran a what if on the position. Downturn scenario, thesis check, the whole thing. Two minutes instead of a weekend.\n\n#AskApe #Stocks #Money #NYC #Finance",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw4xk52xu22g",
+    "posted_at": "2026-09-22T19:28:48.057Z"
   },
   {
     "at": "2026-09-22T16:30:00Z",
     "text": "Syncing the brokerages felt small. Seeing everything in one place was not small at all.\n\nSync the bags. See the truth. AskApe.com.\n\n#AskApe #Money #Finance #NYC #Stocks",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw4xk555pm2c",
+    "posted_at": "2026-09-22T19:28:48.130Z"
   },
   {
     "at": "2026-09-23T11:45:00Z",
@@ -7260,9 +7264,9 @@
       "height": 1920
     },
     "alt": "The market speaks in filings",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-22T19:28:49.772Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw4xk5tzc62v",
     "error": null
   },
   {
@@ -7276,9 +7280,9 @@
       "height": 1920
     },
     "alt": "The market publishes everything and explains nothing",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-22T19:28:51.184Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw4xk7cqnc2f",
     "error": null
   },
   {
@@ -7292,9 +7296,9 @@
       "height": 1920
     },
     "alt": "A red month tests the thesis",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-22T19:28:52.458Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw4xkanca52k",
     "error": null
   },
   {
@@ -7308,9 +7312,9 @@
       "height": 1920
     },
     "alt": "Portfolio reviews fail when they require opening nine apps to reconstruct one week",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-22T19:28:53.694Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw4xkbs3jn26",
     "error": null
   },
   {
