@@ -5497,9 +5497,11 @@
     "text": "You can tell what retail owns by what gaps at the open.\n\nThe gap up belongs to whoever read the room at 6am, not 10am.\n\nThe trend pays. The exit keeps.\n\n#Trading #NYC #Finance #Stocks #Money",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw6vndwk3x2d",
+    "posted_at": "2026-09-23T14:00:07.937Z"
   },
   {
     "at": "2026-09-23T14:15:00Z",
