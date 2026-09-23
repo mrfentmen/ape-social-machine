@@ -5486,9 +5486,11 @@
     "text": "Retail investing has a research problem. It isn't the data. It's the decoding.\n\nThere's no badge for trade count. There's a bill.\n\nCheck the cash. Then talk.\n\n#Stocks #AskApe #Money #Finance #Trading",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mw6usftiux2u",
+    "posted_at": "2026-09-23T13:45:03.968Z"
   },
   {
     "at": "2026-09-23T14:00:00Z",
