@@ -2224,9 +2224,9 @@
     "text": "The ticker told you nothing. I read the filing instead.\n\nI asked which number nobody was quoting. Turns out it was the one that decided things.\n\n#AskApe #AI #stocks",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-24T23:40:47.831Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwcgklcsfg23",
     "error": null
   },
   {
