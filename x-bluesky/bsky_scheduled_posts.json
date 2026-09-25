@@ -5893,9 +5893,11 @@
     "text": "Guidance is management's forecast. Forecasts are marketing with a spreadsheet attached.\n\nApe AI. The reading, handled.\n\n#Stocks #NYC #Finance #AskApe #Money",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwdtrdyjdx2m",
+    "posted_at": "2026-09-25T13:09:53.420Z"
   },
   {
     "at": "2026-09-25T13:15:00Z",
