@@ -5882,9 +5882,11 @@
     "text": "The gap opens. So do I.\n\nTwitch reflexes, spreadsheet discipline. Weird mix, it works.\n\n#AskApe #Finance #NYC #Trading #Money",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwdswcqixu2d",
+    "posted_at": "2026-09-25T12:54:46.141Z"
   },
   {
     "at": "2026-09-25T13:00:00Z",
