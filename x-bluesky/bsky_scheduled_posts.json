@@ -5904,9 +5904,11 @@
     "text": "There's no badge for trade count. There's a bill.\n\nVerify, then decide.\n\n#Trading #Money #NYC #Finance #Stocks",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwdumf7rru2d",
+    "posted_at": "2026-09-25T13:25:00.678Z"
   },
   {
     "at": "2026-09-25T13:30:00Z",
