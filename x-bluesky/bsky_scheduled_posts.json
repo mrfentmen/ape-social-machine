@@ -3018,9 +3018,11 @@
     "text": "I'd rather miss ten trades than manage one bad one.\n\nSpeed is the edge. Discipline keeps it.\n\n#AskApe #ApeAI #investing #stocks #money",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwgup2jpvu2d",
+    "posted_at": "2026-09-26T18:04:29.354Z"
   },
   {
     "at": "2026-09-26T18:15:00Z",
@@ -7872,9 +7874,9 @@
       "height": 1920
     },
     "alt": "Half the market's complexity is vocabulary",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-26T18:04:27.626Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwguoye2pm23",
     "error": null
   },
   {
@@ -7888,9 +7890,9 @@
       "height": 1920
     },
     "alt": "Retail investors aren't underinformed",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-26T18:04:29.288Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwguozoqkt2d",
     "error": null
   },
   {
