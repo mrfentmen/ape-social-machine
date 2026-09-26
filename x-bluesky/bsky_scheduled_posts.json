@@ -3007,9 +3007,11 @@
     "text": "Think fast, trade faster.\n\nTwitch reflexes, spreadsheet discipline. Weird mix, it works.\n\nThe chart is a game and the tutorial is your own tape.\n\n#AskApe #stocks #investing #trading #finance",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwfeqk5luq2s",
+    "posted_at": "2026-09-26T03:46:19.693Z"
   },
   {
     "at": "2026-09-26T18:00:00Z",
