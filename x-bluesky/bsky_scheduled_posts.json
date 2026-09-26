@@ -6248,9 +6248,11 @@
     "text": "Options chains are the new group chat. The volume tells you the mood.\n\nIf it's crowded, have an exit buddy.\n\n#Finance #Money #AskApe #Trading #NYC",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwgikafau524",
+    "posted_at": "2026-09-26T14:27:02.918Z"
   },
   {
     "at": "2026-09-26T14:30:00Z",
