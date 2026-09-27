@@ -3656,9 +3656,11 @@
     "text": "Everyone's a fund manager until the open hits. Then it's SPY, 0DTE, and vibes.\n\nThe gap up belongs to whoever read the room at 6am, not 10am.\n\nTrade what's moving. Leave what's talking.\n\n#AskApe #XYZ #NYC #finance #investing",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwju7dj56m24",
+    "posted_at": "2026-09-27T22:33:41.104Z"
   },
   {
     "at": "2026-09-27T22:45:00Z",
