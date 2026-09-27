@@ -3458,27 +3458,33 @@
     "text": "The chart moved. So did I.\n\nI'd rather miss ten trades than manage one bad one.\n\nOne chart. One shot.\n\n#AskApe #money #finance #stocks #markets",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwjiquefo323",
+    "posted_at": "2026-09-27T19:08:44.321Z"
   },
   {
     "at": "2026-09-27T18:15:00Z",
     "text": "Entry, exit, respawn.\n\nMomentum is a language. I'm fluent.\n\nOne chart. One shot.\n\n#AskApe #investing #stocks #ApeAI #markets",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwjiquh2bf2d",
+    "posted_at": "2026-09-27T19:08:44.403Z"
   },
   {
     "at": "2026-09-27T18:30:00Z",
     "text": "Hesitation is a position. A bad one.\n\nScalp the open, respect the stop, be gone by noon.\n\n#AskApe #stocks #investing #AskApeAI #trading",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwjiqujlvl2c",
+    "posted_at": "2026-09-27T19:08:44.486Z"
   },
   {
     "at": "2026-09-27T18:45:00Z",
@@ -8056,9 +8062,9 @@
       "height": 1920
     },
     "alt": "The hardest part of investing was never access",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-27T19:08:40.084Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwjiqps4al2c",
     "error": null
   },
   {
@@ -8072,9 +8078,9 @@
       "height": 1920
     },
     "alt": "Position sizing is the most underrated risk tool",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-27T19:08:42.152Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwjiqrnzqb24",
     "error": null
   },
   {
@@ -8088,9 +8094,9 @@
       "height": 1920
     },
     "alt": "The number on the screen is the least interesting number in the filing",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-27T19:08:44.235Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwjiqtlwzr2s",
     "error": null
   },
   {
