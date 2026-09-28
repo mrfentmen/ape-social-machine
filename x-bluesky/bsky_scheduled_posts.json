@@ -3755,9 +3755,11 @@
     "text": "Everybody's looking for the next squeeze. Nobody's looking for the exit.\n\n24 hour markets blur the day. My stop losses keep the calendar.\n\nEverybody wants fast cash. Few want fast losses on the way. That's the filter.\n\n#AskApe #money #markets #AskApeAI #finance",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwk3kaazji2s",
+    "posted_at": "2026-09-28T00:45:02.982Z"
   },
   {
     "at": "2026-09-28T01:00:00Z",
