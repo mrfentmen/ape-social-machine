@@ -6903,9 +6903,11 @@
     "text": "A competitor's press release is marketing. A competitor's capex budget is a confession.\n\nApe AI exists for exactly this gap.\n\n#NYC #AskApe #Stocks #Trading #Money",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwlnexd7ph2v",
+    "posted_at": "2026-09-28T15:36:52.937Z"
   },
   {
     "at": "2026-09-28T15:45:00Z",
