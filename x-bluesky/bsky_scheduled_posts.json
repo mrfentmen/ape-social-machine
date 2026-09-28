@@ -3766,9 +3766,11 @@
     "text": "Preparation is the cheat code. The bell is just the starting gun.\n\nSpeed is the edge. Discipline keeps it.\n\n#AskApe #finance #investing #NYC #ApeAI",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwk4f57xjy2d",
+    "posted_at": "2026-09-28T01:00:05.773Z"
   },
   {
     "at": "2026-09-28T01:15:00Z",
