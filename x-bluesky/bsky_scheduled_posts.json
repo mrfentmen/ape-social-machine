@@ -4338,27 +4338,33 @@
     "text": "I scalp the open and ghost before lunch.\n\nSmall size, fast hands, big sample. That's the edge.\n\nAlerts on. Ego off.\n\n#AskApe #NYC #markets #ApeAI #AskApeAI",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwomjhngt72h",
+    "posted_at": "2026-09-29T19:59:29.740Z"
   },
   {
     "at": "2026-09-29T18:00:00Z",
     "text": "Crypto trades all night, so my alerts never sleep. Honestly, neither do I.\n\nMomentum is a rental. Return it on time.\n\n#AskApe #money #stocks #AskApeAI #ApeAI",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwomjhojp22m",
+    "posted_at": "2026-09-29T19:59:29.772Z"
   },
   {
     "at": "2026-09-29T18:15:00Z",
     "text": "Scalp season is every season.\n\nI'm not smarter than anyone here. I'm just gone before they finish their thesis.\n\nSmall size, fast hands, big sample. That's the edge.\n\n#AskApe #investing #NYC #money #XYZ",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwomjhpkt524",
+    "posted_at": "2026-09-29T19:59:29.805Z"
   },
   {
     "at": "2026-09-29T18:30:00Z",
@@ -8440,9 +8446,9 @@
       "height": 1920
     },
     "alt": "The hardest part of investing was never access",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-29T19:59:25.847Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwomjdf6gr2d",
     "error": null
   },
   {
@@ -8456,9 +8462,9 @@
       "height": 1920
     },
     "alt": "Checklists don't make you smarter",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-29T19:59:27.612Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwomjexkik2m",
     "error": null
   },
   {
@@ -8472,9 +8478,9 @@
       "height": 1920
     },
     "alt": "Checking the price hourly is a subscription to anxiety, not a research process",
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-09-29T19:59:29.703Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwomjgy4hm22",
     "error": null
   }
 ]
