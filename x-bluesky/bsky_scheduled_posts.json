@@ -4250,9 +4250,11 @@
     "text": "Think fast, trade faster.\n\nCharts don't scare me. Lag does.\n\nMomentum is a language. I'm fluent.\n\n#AskApe #trading #money #stocks #XYZ",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwmqp4hv3p2w",
+    "posted_at": "2026-09-29T02:08:54.860Z"
   },
   {
     "at": "2026-09-29T02:15:00Z",
