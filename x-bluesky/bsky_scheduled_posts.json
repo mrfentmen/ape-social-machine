@@ -5009,9 +5009,11 @@
     "text": "Zero emotional baggage. All stop losses.\n\nDiscipline is the costume. Speed is the superpower.\n\n#AskApe #money #investing #AskApeAI #XYZ",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwrdhen3jv2s",
+    "posted_at": "2026-09-30T21:55:15.020Z"
   },
   {
     "at": "2026-09-30T22:00:00Z",
