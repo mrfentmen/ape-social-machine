@@ -5185,9 +5185,11 @@
     "text": "Risk is one stop loss away from being a rounding error.\n\nWin the first hour and the day follows.\n\n#AskApe #money #investing #markets #NYC",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
+    "posted": true,
     "posted_uri": null,
-    "error": null
+    "error": null,
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mwrqcqgpss2h",
+    "posted_at": "2026-10-01T01:45:18.256Z"
   },
   {
     "at": "2026-10-01T02:00:00Z",
