@@ -10132,9 +10132,9 @@
     "text": "Every strategy works in a backtest. Backtests don't pay for groceries.\n\nAskApe.com. Research at reading speed.\n\n#AskApe #markets #AI",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-10-20T18:28:28.345Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mydb7zwngb2m",
     "error": null
   },
   {
