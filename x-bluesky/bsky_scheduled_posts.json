@@ -9942,9 +9942,9 @@
     "text": "I trade the reaction, never the prediction.\n\nEvery screenshot of a win hides ten unposted stops.\n\n#AskApe #money #AskApeAI #stocks #XYZ",
     "kind": "root",
     "target_uri": null,
-    "posted": false,
-    "posted_at": null,
-    "uri": null,
+    "posted": true,
+    "posted_at": "2026-10-20T13:30:06.335Z",
+    "uri": "at://did:plc:fnmuakyf6pifkupr6yu2am5v/app.bsky.feed.post/3mycqkjb6xy2p",
     "error": null
   },
   {
